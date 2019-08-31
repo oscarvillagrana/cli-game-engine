@@ -1,6 +1,4 @@
 # cpp-toolbox
-projects using fundamentals
-
-For the course CS 110B at City College of San Francisco. Instructed by Max Luttrell in Fall 2019.
+Projects using C++ programming fundamentals for the course CS 110B at City College of San Francisco.
 
 ### Data Types, Input/Output, If, If-Else

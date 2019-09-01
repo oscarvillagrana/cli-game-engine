@@ -20,27 +20,13 @@ int get_starting_cards(int card)
 // call this once (and only once) at the beginning of your program to "seed" the random number generator
 int get_random_number(int number)
 {
-    ;
+    // generate a random number between 1 and 10 with C functions rand() and srand()
+    unsigned seed = time(0);
+    srand(seed);
+;
 }
 // Generate_new_card in each loop and display the value
 int get_new_card(int new_card)
 {
     new_card = 1 + rand() % 10;
-}
-// Check to see if the user busts in each loop
-int check_if_bust(int card)
-{
-    ;
-}
-char check_response(char hit_response)
-{
-    ;
-}
-int check_if_dealer_moves(int dlr_total)
-{
-    ;
-}
-int check_who_wins(int usr_total, int dlr_total)
-{
-    ;   
 }

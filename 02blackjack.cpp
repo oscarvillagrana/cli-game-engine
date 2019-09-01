@@ -49,22 +49,7 @@ int main()
    return 0;
 }
 
-
-// generate and print two random cards. players get two cards
-int get_starting_cards(int card);
-// call this once (and only once) at the beginning of your program to "seed" the random number generator
-int get_random_number(int number);
-// Generate_new_card in each loop and display the value
-int get_new_card(int new_card);
-// Check to see if the user busts in each loop
-int check_if_bust(int card);
-char check_response(char hit_response);
-int check_if_dealer_moves(int dlr_total);
-int check_who_wins(int usr_total, int dlr_total);
-
-
-
-
+// Logic
 
 std::cout << "Your starting cards: " << usr_first_cards << std::endl;
 
@@ -125,6 +110,7 @@ std::cout << "Total: " << usr_total << std::endl;
 
 std::cout << "Play again? (y/n): " << std::endl;
 
+
 // Address the problem using an iterative approach. 
 // Start with a small amount of functionality, and then grow it gradually. 
 // This way you can compile and run your program after each statement that you write to make sure everything still works.  
@@ -134,11 +120,9 @@ std::cout << "Play again? (y/n): " << std::endl;
 
 // The player plays before the dealer.  
 
-
 // If the player busts, the dealer automatically wins
 if (usr_total >= 22)
     std::cout << "Bust. " << "You Loose" << std::endl;
-
 
 // added a dealer to the game
 if (dlr_total < 17)
@@ -167,7 +151,9 @@ int get_starting_cards(int card)
 // call this once (and only once) at the beginning of your program to "seed" the random number generator
 int get_random_number(int number)
 {
-    ;
+     // generate a random number between 1 and 10 with C functions rand() and srand()
+    unsigned seed = time(0);
+    srand(seed);
 }
 // Generate_new_card in each loop and display the value
 int get_new_card(int new_card)
@@ -190,6 +176,4 @@ int check_if_dealer_moves(int dlr_total)
 int check_who_wins(int usr_total, int dlr_total)
 {
     ;   
-}
-    
 }

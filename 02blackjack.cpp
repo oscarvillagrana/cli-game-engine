@@ -7,149 +7,183 @@
 
 using namespace std;
 
+int get_starting_cards(int card);
+int get_random_number(int number);
+int get_new_card(int card);
+int check_if_bust(int card);
+char check_response(char hit_response);
+int check_if_dealer_moves(int dlr_total);
+int check_who_wins(int usr_total, int dlr_total);
+
+
 int main()
-{
-   int count;
-   char goAgain = 'y';
-   while (goAgain != 'n')
+{ 
+    // generate a random number between 1 and 10 with C functions rand() and srand()
+    int card = 0;
+    unsigned seed = time(0);
+    srand(seed);
+
+    int new_card = 0;
+    int usr_first_cards = 0;
+    int usr_card = 0;
+    // a variable to store the total, and a statement to show its value:
+    int usr_total = 0;
+    // read in a user response 
+    char hit_response = y;
+
+    int dlr_first_cards = 0;
+    int dlr_card = 0;
+    // Update the total in each loop.
+    int dlr_total = 0;
+
+
+// Wrap the game in loop that handles the Play-Again functionality
+   char hitMe = 'y';
+   while (hitMe != 'n')
    {
-
-
-
-      cout << "How many asterisks?: ";
-      cin >> count;
-      for (int i = 0; i < count; i++)
-      {
-      cout << "*";
-      }
-      cout << endl;
-      cout << "Go again? (y/n): ";
-      cin >> goAgain;
-
-
-
-
-
-
+      card = 1 + rand() % 10;
+      cout << card << std::endl;
+      cout << "Hit? (y/n): ";
+      cin >> hitMe;
    }
    return 0;
 }
 
 
+// generate and print two random cards. players get two cards
+int get_starting_cards(int card);
+// call this once (and only once) at the beginning of your program to "seed" the random number generator
+int get_random_number(int number);
+// Generate_new_card in each loop and display the value
+int get_new_card(int new_card);
+// Check to see if the user busts in each loop
+int check_if_bust(int card);
+char check_response(char hit_response);
+int check_if_dealer_moves(int dlr_total);
+int check_who_wins(int usr_total, int dlr_total);
 
-int generate_random_card() 
-
-int card_1 = 0
-int card_2 = 0
 
 
-// First card: 3
-std::cout << card_1 << std::endl;
 
 
-int total = 0
+std::cout << "Your starting cards: " << usr_first_cards << std::endl;
 
-// generate and print two random cards
-std::cout << card_1 << "," << card_2 << std::endl;
+std::cout << "Total: " << usr_total << std::endl;
 
-// add a variable to store the total, and a statement to show its value:
-int new_total = 0
+std::cout << "hit? (y/n): " << std::endl;
 
-std::cout << new_total << std::endl;
+cin >> hitMe;
 
-// read in a user response 
-// print out the value that was entered
-std::cout << "Do you want another card? (y/n): " << std::endl;
-char user_response = y
+std::cout << "Card: " << usr_card << std::endl;
+
+std::cout << "Total: " << usr_total << std::endl;
+
+std::cout << "hit? (y/n): " << std::endl;
+
+std::cin >> hit_response >> std::endl; 
+
 std::cout << "You entered: " << user_response << std::endl;
 
-// add a loop, without yet adding the blackjack logic
-> First cards: 3, 2
-> Total: 5
-> Do you want another card? (y/n): y
-> Do you want another card? (y/n): y
-> Do you want another card? (y/n): n
 
-Now move the display of the total to the loop
-> First cards: 3, 2
-> Total: 5
-> Do you want another card? (y/n): y
-> Total: 5
-> Do you want another card? (y/n): y
-> Total: 5
-> Do you want another card? (y/n): n
+std::cout << "Dealer has a " << dlr_first_cards << std::endl;
 
-
-Your next steps might be something like this:
-
-// Generate_new_card in each loop and display the value
-// Update the total in each loop.
-
-// Check to see if the user busts in each loop
-// Wrap the game in loop that handles the Play-Again functionality
-
-int current_cards = 0;
-int total = 0;
-
-srand() -- you will need to call this once (and only once) at the beginning of your program to "seed" the random number generator, 
-so that every time you run your program, you get different random numbers.  If you don't, you'll get the same "random" numbers every time you run the program!  
-Once you have called srand() once in your program, you should not call it again.
-
-
-hand:
-
-players get two cards
-
-if (hand >= 22)
-    std::cout << "Bust" << std::endl;
-
-each time the player gets a card
-
-generate a random number between 1 and 10 with C functions rand() and srand()
-
-> The dealer starts with a 10
-std::cout << "Your first cards: " << card_1 << "," << card_2 << std::endl;
-std::cout << "Total: " << total_1 << std::endl;
-std::cout << "hit? (y/n): " << std::endl;
-std::cout << "Card: " << card_1 << std::endl;
-std::cout << "Total: " << total_2 << std::endl;
-std::cout << "hit? (y/n): " << std::endl;
-std::cout << "Dealer has a " << dealer1 << std::endl;
 std::cout << "(c to continue)" << std::endl;
-std::cout << "Dealer gets a " << dealer2 << std::endl;
-std::cout << "Total: " << dealer1 + dealer2 << std::endl;
-std::cout << "Card: " << card_1 << std::endl;
-std::cout << "Total: " << total_2 << std::endl;
+
+std::cout << "Dealer gets a " << dlr_card << std::endl;
+
+std::cout << "Total: " << dlr_total << std::endl;
+
+
+std::cout << "Card: " << usr_card << std::endl;
+
+std::cout << "Total: " << usr_total << std::endl;
+
 std::cout << "hit? (y/n): " << std::endl;
-std::cout << "Card: " << card_1 << std::endl;
-std::cout << "Total: " << total_3 << std::endl;
+
+
+std::cout << "Card: " << usr_card << std::endl;
+
+std::cout << "Total: " << usr_total << std::endl;
+
 std::cout << "hit? (y/n): " << std::endl;
-std::cout << "Card: " << card_1 << std::endl;
-std::cout << "Total: " << total_4 << std::endl;
+
+std::cin >> hit_response >> std::endl; 
+
+std::cout << "You entered: " << hit_response << std::endl;
+
+std::cout << "Card: " << usr_card << std::endl;
+
+std::cout << "Total: " << usr_total << std::endl;
+
 std::cout << "Push!" << std::endl;
+
+
 std::cout << "Dealer Wins!" << std::endl;
-std::cout << "Total: " << total_4 << std::endl;
+
+std::cout << "Total: " << usr_total << std::endl;
+
 
 std::cout << "Play again? (y/n): " << std::endl;
 
 // Address the problem using an iterative approach. 
 // Start with a small amount of functionality, and then grow it gradually. 
 // This way you can compile and run your program after each statement that you write to make sure everything still works.  
-// If you try to write it all at once you may have problems finding bugs.
 
+
+// blackjack logic
 
 // add a dealer to the game
-// There are three important blackjack rules to include:
 
-The player plays before the dealer.  
+// The player plays before the dealer.  
 
-If the player busts, the dealer automatically wins
+// If the player busts, the dealer automatically wins
 
-if total < 17 
+if (total < 17)
     dealers must take more cards
-if dealer =< 22 (bust)
-    player wins.
-if the player == dealer (push)
-    player does not win or lose money.
 
-Otherwise, whoever has the higher total wins.
+if (dealer =< 22) 
+    player wins << "bust"
+
+if (the player == dealer)
+    << push
+    player does not win or lose money
+
+else
+    whoever has the higher total wins
+
+if (hand >= 22)
+    std::cout << "Bust" << std::endl;
+
+
+// generate and print two random cards. players get two cards
+int get_starting_cards(int card);
+{
+
+}
+// call this once (and only once) at the beginning of your program to "seed" the random number generator
+int get_random_number(int number);
+{
+    
+}
+// Generate_new_card in each loop and display the value
+int get_new_card(int new_card);
+{
+    
+}
+// Check to see if the user busts in each loop
+int check_if_bust(int card);
+{
+    
+}
+char check_response(char hit_response);
+{
+    
+}
+int check_if_dealer_moves(int dlr_total);
+{
+    
+}
+int check_who_wins(int usr_total, int dlr_total);
+{
+    
+}

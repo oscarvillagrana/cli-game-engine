@@ -46,23 +46,23 @@ while (hitMe != 'n')
 new_card = 1 + rand() % 10;
 
 
-std::cout << "Your starting cards: " << usr_first_cards << std::endl;
+std::cout << "Your starting cards: " << usr_first_cards << "\n";
 
-std::cout << "Total: " << usr_total << std::endl;
+std::cout << "Total: " << usr_total << "\n";
 
-std::cout << "hit? (y/n): " << std::endl;
+std::cout << "hit? (y/n): " << "\n";
 
 cin >> hitMe;
 
-std::cout << "Card: " << usr_card << std::endl;
+std::cout << "Card: " << usr_card << "\n";
 
-std::cout << "Total: " << usr_total << std::endl;
+std::cout << "Total: " << usr_total << "\n";
 
-std::cout << "hit? (y/n): " << std::endl;
+std::cout << "hit? (y/n): " << "\n";
 
-std::cin >> hit_response >> std::endl; 
+std::cin >> hit_response << "\n"; 
 
-std::cout << "You entered: " << user_response << std::endl;
+std::cout << "You entered: " << hit_response << "\n";
 
 
 }

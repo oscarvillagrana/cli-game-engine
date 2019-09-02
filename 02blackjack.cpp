@@ -7,51 +7,70 @@
 
 using namespace std;
 
-int get_starting_cards(int card);
-int get_random_number(int number);
-int get_new_card(int card);
-    new_card = 1 + rand() % 10;
-int check_if_bust(int card);
-char check_response(char hit_response);
+int get_random_seed();
+int get_random_number();
+int get_starting_cards();
+int get_new_card();
+
 int check_if_dealer_moves(int dlr_total);
 int check_who_wins(int usr_total, int dlr_total);
+int check_if_bust(int dlr_total, int usr_total);
+
+char check_response(char hit_response);
+
 
 
 int main()
 { 
-    // generate a random number between 1 and 10 with C functions rand() and srand()
-    unsigned seed = time(0);
-    srand(seed);
-
-    int new_card = 0;
-    int usr_first_cards = 0;
-    int usr_card = 0;
-    // a variable to store the total, and a statement to show its value:
-    int usr_total = 0;
-    // read in a user response 
-    char hit_response = y;
-
-    int dlr_first_cards = 0;
-    int dlr_card = 0;
-    // Update the total in each loop.
-    int dlr_total = 0;
+get_random_seed();
 
 
-// Wrap the game in loop that handles the Play-Again functionality
-   char hitMe = 'y';
-   while (hitMe != 'n')
-   {
-      new_card = 1 + rand() % 10;
-      cout << card << std::endl;
-      cout << "Hit? (y/n): ";
-      cin >> hitMe;
-   }
-   return 0;
+int usr_first_cards = 0;
+
+// read in a user response 
+char hit_response = y;
+
+int dlr_card = 0;
+
+// a variable to store the total, and a statement to show its value:
+int usr_total = 0;
+
+int dlr_first_cards = 0;
+
+int dlr_card = 0;
+// Update the total in each loop.
+int dlr_total = 0;
+
+
+// A loop that handles the Play-Again functionality
+char play_again = 'y';
+while (play_again != 'n')
+{  
+  cout << "Play again? (y/n): ";
+  cin >> play_again;
+}
+return 0;
+}
+{
+
+// A loop that handles the Play-Again functionality
+char hit_me = 'y';
+while (hit_me != 'n')
+{
+  cout << "Hit? (y/n): ";
+  cin >> hit_me;
+}
+return 0;
 }
 
-// Logic
+// blackjack logic
+// The player plays before the dealer.  
+
+int get_starting_cards(int card);
 
 std::cout << "Your starting cards: " << usr_first_cards << std::endl;
+
+int get_usr_total = 0;
 
 std::cout << "Total: " << usr_total << std::endl;
 
@@ -59,25 +78,67 @@ std::cout << "hit? (y/n): " << std::endl;
 
 cin >> hitMe;
 
-std::cout << "Card: " << usr_card << std::endl;
+while (hitMe == y)
+{
+  std::cout << "You entered: " << hitMe << std::endl;
 
-std::cout << "Total: " << usr_total << std::endl;
+  get_new_card(int new_card);
+  
+  std::cout << "New card: " << usr_card << std::endl;
+  
+  std::cout << "Total: " << usr_total << std::endl;
 
-std::cout << "hit? (y/n): " << std::endl;
+// int check_if_bust(int card);
+// If the player busts, the dealer automatically wins
+  if (usr_total >= 22)
+    std::cout << "Bust. " << "You Loose" << std::endl;
+}
 
-std::cin >> hit_response >> std::endl; 
+std::cout << "\n";
+  return 0;
 
-std::cout << "You entered: " << user_response << std::endl;
+// added a dealer to the game
 
+int get_starting_cards(int card);
 
 std::cout << "Dealer has a " << dlr_first_cards << std::endl;
 
 std::cout << "(c to continue)" << std::endl;
 
+cin >> cont; 
+
+while (cont == c)
+
+while check_if_dealer_moves(dlr_total) = y
+
+{
+get_new_card(int new_card);
+
 std::cout << "Dealer gets a " << dlr_card << std::endl;
 
 std::cout << "Total: " << dlr_total << std::endl;
 
+// check_if_bust(int card)
+
+char check_response(char hit_response)
+{
+    ;
+}
+
+int check_if_bust(int card);
+
+
+
+int check_who_wins(int usr_total, int dlr_total);
+
+
+std::cout << "Push!" << std::endl;
+
+
+std::cout << "Dealer Wins!" << std::endl;
+
+
+/* repeated entry
 
 std::cout << "Card: " << usr_card << std::endl;
 
@@ -100,80 +161,111 @@ std::cout << "Card: " << usr_card << std::endl;
 
 std::cout << "Total: " << usr_total << std::endl;
 
-std::cout << "Push!" << std::endl;
-
-
-std::cout << "Dealer Wins!" << std::endl;
 
 std::cout << "Total: " << usr_total << std::endl;
 
 
 std::cout << "Play again? (y/n): " << std::endl;
 
+*/
 
 // Address the problem using an iterative approach. 
 // Start with a small amount of functionality, and then grow it gradually. 
 // This way you can compile and run your program after each statement that you write to make sure everything still works.  
 
 
-// blackjack logic
+// call this once (and only once) at the beginning of your program
+int get_random_seed()
+{
+// generate a seed using time function to start rand() function
+unsigned seed = time(0);
+srand(seed);
+}
 
-// The player plays before the dealer.  
-
-// If the player busts, the dealer automatically wins
-if (usr_total >= 22)
-    std::cout << "Bust. " << "You Loose" << std::endl;
-
-// added a dealer to the game
-if (dlr_total < 17)
-    get_new_card()
-
-if (dlr_total =< 22)  
-    "Bust. " << "You win " 
-
-if (usr_total == usr_total)
-    "Push. " << "You tie "
-//    player does not win or lose money
-
-else
-//    whoever has the higher total wins
-if (dlr_total < usr_total)
-    "You Win"
-if (dlr_total > usr_total)
-    "You Loose"
-
+int get_random_number()
+{
+int random_number;
+  // get new card number: up to and including 10 and add one so we never get 0.
+random_number = 1 + rand() % 10;
+return random_number;
+}
 
 // generate and print two random cards. players get two cards
-int get_starting_cards(int card)
+int get_starting_cards()
 {
-    ;
+int card1;
+int card2;
+
+card1 = get_random_number();
+card2 = get_random_number();
+
+cout << card1 << "," << card2 << endl;
 }
-// call this once (and only once) at the beginning of your program to "seed" the random number generator
-int get_random_number(int number)
+
+int get_new_card()
 {
-     // generate a random number between 1 and 10 with C functions rand() and srand()
-    unsigned seed = time(0);
-    srand(seed);
+int card;
+int new_card;
+new_card = get_random_number();
+cout << new_card << endl;
 }
-// Generate_new_card in each loop and display the value
-int get_new_card(int new_card)
-{
-    new_card = 1 + rand() % 10;
-}
+
+
 // Check to see if the user busts in each loop
-int check_if_bust(int card)
+int check_if_bust(int dlr_total, int usr_total)
 {
-    ;
+// check if user busts
+if (usr_total >= 22)
+cout << "Bust. " << "You Loose" << endl;
+
+// check if dealer busts
+if (dlr_total >= 22)  
+cout << "Dealer Busts. " << "You Win" << endl;
 }
-char check_response(char hit_response)
-{
-    ;
-}
+
 int check_if_dealer_moves(int dlr_total)
 {
-    ;
+  char moves = 'y';
+  while (moves != 'n')
+  {
+    if (dlr_total < 17)
+      {
+        moves = 'y';
+        // test
+        // cout << "yes moves" << endl;
+      }
+    else 
+      moves = 'n'; 
+      // test
+      // cout << "no moves" << endl;
+      return 0;
+  }
 }
 int check_who_wins(int usr_total, int dlr_total)
 {
-    ;   
+//    player does not win or lose money
+if (usr_total == dlr_total)
+    cout << "Push. " << "You tie " << endl;
+     
+//    whoever has the higher total wins
+if (dlr_total < usr_total)
+cout << "You Win" << endl;
+    
+if (dlr_total > usr_total)
+cout << "You Loose" << endl;
 }
+
+/* Testers
+
+int usr_total = 0;
+cout << "usr_total?" << endl;
+cin >> usr_total;
+int dlr_total = 0;
+cout << "dlr_total?" << endl;
+cin >> dlr_total;
+
+check_if_dealer_moves(dlr_total);
+check_who_wins(usr_total, dlr_total);
+check_if_bust(dlr_total, usr_total);
+
+*/

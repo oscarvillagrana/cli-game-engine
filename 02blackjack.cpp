@@ -27,121 +27,45 @@ get_random_seed();
 
 
 int usr_first_cards = 0;
-
 // read in a user response 
 char hit_response = y;
-
 int dlr_card = 0;
-
 // a variable to store the total, and a statement to show its value:
 int usr_total = 0;
-
 int dlr_first_cards = 0;
-
 int dlr_card = 0;
 // Update the total in each loop.
 int dlr_total = 0;
 
+int card_0, card_1, card_2, card_3, card_4, card_5, card_6;
+int total_1, total_2, total_3, total_4, total_5, total_6;
 
-// A loop that handles the Play-Again functionality
-char play_again = 'y';
-while (play_again != 'n')
-{  
-  cout << "Play again? (y/n): ";
-  cin >> play_again;
-}
-return 0;
-}
-{
 
-// A loop that handles the Play-Again functionality
-char hit_me = 'y';
-while (hit_me != 'n')
-{
-  cout << "Hit? (y/n): ";
-  cin >> hit_me;
-}
-return 0;
+
 }
 
 // blackjack logic
 // The player plays before the dealer.  
 
-int usr_first_cards;
-usr_first_cards = get_starting_cards();
-
-std::cout << "Your starting cards: " << usr_first_cards << std::endl;
-
-int get_usr_total = 0;
-
-std::cout << "Total: " << usr_total << std::endl;
-
-std::cout << "hit? (y/n): " << std::endl;
-
-cin >> hitMe;
-
-while (hit_me != 'n')
-{
-  std::cout << "You entered: " << hitMe << std::endl;
-
-  get_new_card(int new_card);
-  
-  std::cout << "New card: " << usr_card << std::endl;
-  
-  std::cout << "Total: " << usr_total << std::endl;
-
-// int check_if_bust(int card);
-// If the player busts, the dealer automatically wins
-  if (usr_total >= 22)
-    std::cout << "Bust. " << "You Loose" << std::endl;
-}
-
-std::cout << "\n";
-  return 0;
-
-// added a dealer to the game
-
-int get_starting_cards(int card);
-
-std::cout << "Dealer has a " << dlr_first_cards << std::endl;
-
-std::cout << "(c to continue)" << std::endl;
-
-cin >> cont; 
-
-while (cont == c)
-
-while check_if_dealer_moves(dlr_total) = y
-
-{
-get_new_card(int new_card);
-
-std::cout << "Dealer gets a " << dlr_card << std::endl;
-
-std::cout << "Total: " << dlr_total << std::endl;
-
-// check_if_bust(int card)
-
-char check_response(char hit_response)
-{
-    ;
-}
-
-int check_if_bust(int card);
-
-
-
-int check_who_wins(int usr_total, int dlr_total);
-
-
-std::cout << "Push!" << std::endl;
-
-
-std::cout << "Dealer Wins!" << std::endl;
-
 
 int user_goes()
 {
+  int card_0, card_1, card_2, card_3, card_4, card_5, card_6;
+  int total_1, total_2, total_3, total_4, total_5, total_6;
+
+  card_0 = get_random_number();
+  card_1 = get_random_number();
+  card_2 = get_random_number();
+  card_3 = get_random_number();
+  card_4 = get_random_number();
+  card_5 = get_random_number();
+  card_6 = get_random_number();
+  total_1 = card_0 + card_1;
+  total_2 = card_0 + card_1 + card_2;
+  total_3 = card_0 + card_1 + card_2 + card_3;
+  total_4 = card_0 + card_1 + card_2 + card_3 + card_4;
+  total_5 = card_0 + card_1 + card_2 + card_3 + card_4 + card_5;
+  total_6 = card_0 + card_1 + card_2 + card_3 + card_4 + card_5 + card_6;
 
     cout << "Your starting cards: " << card_0 << "," << card_1 << endl;
     cout << "Total: " << total_1 << endl;
@@ -224,66 +148,102 @@ int user_goes()
 
 int dlr_goes()
 {
-char d_continue = 'c';
-char moves = 'y';
+  int d_card_0, d_card_1, d_card_2, d_card_3, d_card_4, d_card_5, d_card_6, d_card_7;
+  int d_total_1, d_total_2, d_total_3, d_total_4, d_total_5, d_total_6;
 
-cout << "Dealer starting cards: " << d_card_0 << "," << d_card_1 << endl;
-cout << "Total: " << d_total_1 << endl;
+  d_card_0 = get_random_number();
+  d_card_1 = get_random_number();
+  d_card_2 = get_random_number();
+  d_card_3 = get_random_number();
+  d_card_4 = get_random_number();
+  d_card_5 = get_random_number();
+  d_card_6 = get_random_number();
+  d_total_1 = d_card_0 + d_card_1;
+  d_total_2 = d_card_0 + d_card_1 + d_card_2;
+  d_total_3 = d_card_0 + d_card_1 + d_card_2 + d_card_3;
+  d_total_4 = d_card_0 + d_card_1 + d_card_2 + d_card_3 + d_card_4;
+  d_total_5 = d_card_0 + d_card_1 + d_card_2 + d_card_3 + d_card_4 + d_card_5;
+  d_total_6 = d_card_0 + d_card_1 + d_card_2 + d_card_3 + d_card_4 + d_card_5 + d_card_6;
 
-// suspense continue
-cout << "(c to continue)" << endl;
-cin >> d_continue; 
 
-// check if dealer moves
-if (d_total_1 < 17)
-{
-cout << "Dealer gets: " << d_card_2 << endl;
-cout << "Total: " << d_total_2 << endl;
+  char d_continue = 'c';
+  char moves = 'y';
+
+  cout << "Dealer starting cards: " << d_card_0 << "," << d_card_1 << endl;
+  cout << "Total: " << d_total_1 << endl;
+
+  // suspense continue
+  cout << "(c to continue)" << endl;
+  cin >> d_continue; 
+
+  // check if dealer moves
+  if (d_total_1 < 17)
+  {
+  cout << "Dealer gets: " << d_card_2 << endl;
+  cout << "Total: " << d_total_2 << endl;
+
+  // check if bust
+  if (d_total_2 >= 22)
+  {
+  cout << "Dealer Busts. " << "You Win" << endl;
+  return 0;    
+  }
+  cout << "(c to continue)" << endl;
+  cin >> d_continue; 
+
+      // check if dealer moves
+      if (d_total_2 < 17)
+      {    
+      cout << "Dealer gets: " << d_card_3 << endl;
+      cout << "Total: " << d_total_3 << endl;
+
+
+      // check if bust
+      if (d_total_3 >= 22)
+      {
+      cout << "Dealer Busts. " << "You Win" << endl;
+      return 0;
+      }
+      cout << "(c to continue)" << endl;
+      cin >> d_continue; 
+      
+          // check if dealer moves
+          if (d_total_3 < 17)
+          {
+          cout << "Dealer gets: " << d_card_4 << endl;
+          cout << "Total: " << d_total_4 << endl;
+
+          // check if bust
+          if (d_total_4 >= 22)
+          {
+          cout << "Dealer Busts. " << "You Win" << endl;
+          return 0;
+          }
+          cout << "(c to continue)" << endl;
+          cin >> d_continue; 
+
+              // check if dealer moves
+              if (d_total_4 < 17)
+              {
+              cout << "Dealer gets: " << d_card_5 << endl;
+              cout << "Total: " << d_total_5 << endl;
+
+              // check if bust
+              if (d_total_5 >= 22)
+              {
+              cout << "Dealer Busts. " << "You Win" << endl;
+              return 0;
+              }
+              }
+
+          }
+      }   
+
+  }
+
+  cout << "Dealer stays " << endl;
 }
-else
-    cout << "Dealer stays " << endl;
 
-// check if bust
-if (d_total_2 >= 22)
-{
-cout << "Dealer Busts. " << "You Win" << endl;
-return 0;
-}
-cout << "(c to continue)" << endl;
-cin >> d_continue; 
-
-// check if dealer moves
-if (d_total_2 < 17)
-
-cout << "Dealer gets: " << d_card_3 << endl;
-cout << "Total: " << d_total_3 << endl;
-else
-    cout << "Dealer stays " << endl;
-
-// check if bust
-if (d_total_3 >= 22)
-
-cout << "Dealer Busts. " << "You Win" << endl;
-return 0;
-
-cout << "(c to continue)" << endl;
-cin >> d_continue; 
-
-// check if dealer moves
-if (d_total_3 < 17)
-
-cout << "Dealer gets: " << d_card_4 << endl;
-cout << "Total: " << d_total_4 << endl;
-else
-    cout << "Dealer stays " << endl;
-
-// check if bust
-if (d_total_4 >= 22)
-
-cout << "Dealer Busts. " << "You Win" << endl;
-return 0;
-
-}
 // Address the problem using an iterative approach. 
 // Start with a small amount of functionality, and then grow it gradually. 
 // This way you can compile and run your program after each statement that you write to make sure everything still works.  

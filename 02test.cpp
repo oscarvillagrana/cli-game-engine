@@ -38,61 +38,76 @@ int main()
     total_5 = card_1 + card_2 + card_3 + card_4 + card_5 + card_6;
     total_5 = card_1 + card_2 + card_3 + card_4 + card_5 + card_6 + card_7;
 
+    int d_card_1, d_card_2, d_card_3, d_card_4, d_card_5, d_card_6, d_card_7;
+    int d_total_1, d_total_2, d_total_3, d_total_4, d_total_5, d_total_6;
+
+    d_card_1 = get_random_number();
+    d_card_2 = get_random_number();
+    d_card_3 = get_random_number();
+    d_card_4 = get_random_number();
+    d_card_5 = get_random_number();
+    d_card_6 = get_random_number();
+    d_card_7 = get_random_number();
+    d_total_1 = d_card_1 + d_card_2;
+    d_total_2 = d_card_1 + d_card_2 + d_card_3;
+    d_total_3 = d_card_1 + d_card_2 + d_card_3 + d_card_4;
+    d_total_4 = d_card_1 + d_card_2 + d_card_3 + d_card_4 + d_card_5;
+    d_total_5 = d_card_1 + d_card_2 + d_card_3 + d_card_4 + d_card_5 + d_card_6;
+    d_total_5 = d_card_1 + d_card_2 + d_card_3 + d_card_4 + d_card_5 + d_card_6 + d_card_7;
+
+
     cout << "Your starting cards: " << card_1 << "," << card_2 << endl;
     cout << "Total: " << total_1 << endl;
 
-// A loop that handles the Play-Again functionality
-char play_again = 'y';
-// while (play_again != 'n')
-
-cout << "Play again? (y/n): ";
-cin >> play_again;
-    if (play_again = 'y')
-    {  
-        cout << "New card: " << card_3 << endl;
-        cout << "Total: " << total_2 << endl;
-        // check if user busts
-        if (total_2 >= 22)
-        {
-            cout << "Bust. " << "You Loose" << endl;
-            return 0;
-        }
-
-        cout << "Play again? (y/n): ";
-        cin >> play_again;
-    }
+    // A loop that handles the Play-Again functionality
+    char play_again = 'y';
+    // while (play_again != 'n')
+    cout << "hit? (y/n): ";
+    cin >> play_again;
         if (play_again = 'y')
-        {
-            cout << "New card: " << card_4 << endl;
-            cout << "Total: " << total_3 << endl;
-            if (total_3 >= 22)
+        {  
+            cout << "New card: " << card_3 << endl;
+            cout << "Total: " << total_2 << endl;
+            if (total_2 >= 22)
             {
                 cout << "Bust. " << "You Loose" << endl;
                 return 0;
             }
-
-            cout << "Play again? (y/n): ";
+                        
+            cout << "hit? (y/n): ";
             cin >> play_again;
             if (play_again = 'y')
             {
-                cout << "New card: " << card_5 << endl;
-                cout << "Total: " << total_4 << endl;
-                if (total_4 >= 22)
+                cout << "New card: " << card_4 << endl;
+                cout << "Total: " << total_3 << endl;
+                if (total_3 >= 22)
                 {
                     cout << "Bust. " << "You Loose" << endl;
                     return 0;
-                    cout << "Play again? (y/n): ";
-                    cin >> play_again;
                 }
+                cout << "hit? (y/n): ";
+                cin >> play_again;
                 if (play_again = 'y')
                 {
-                    cout << "New card: " << card_6 << endl;
-                    cout << "Total: " << total_5 << endl;
+                    cout << "New card: " << card_5 << endl;
+                    cout << "Total: " << total_4 << endl;
                     if (total_4 >= 22)
                     {
                         cout << "Bust. " << "You Loose" << endl;
                         return 0;
-                        cout << "Play again? (y/n): ";
+                    }
+                    cout << "hit? (y/n): ";
+                    cin >> play_again;
+                    if (play_again = 'y')
+                    {
+                        cout << "New card: " << card_6 << endl;
+                        cout << "Total: " << total_5 << endl;
+                        if (total_4 >= 22)
+                        {
+                            cout << "Bust. " << "You Loose" << endl;
+                            return 0;
+                        }
+                        cout << "hit? (y/n): ";
                         cin >> play_again;
                         if (play_again = 'y')
                         {
@@ -105,9 +120,9 @@ cin >> play_again;
                             }
                         }
                     }
-
                 }
             }
+        dlr
         }
 
 }

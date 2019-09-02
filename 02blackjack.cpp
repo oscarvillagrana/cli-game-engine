@@ -9,7 +9,7 @@ using namespace std;
 
 int get_random_seed();
 int get_random_number();
-int get_starting_cards();
+int get_user_cards();
 int get_new_card();
 
 int check_if_dealer_moves(int dlr_total);
@@ -66,7 +66,8 @@ return 0;
 // blackjack logic
 // The player plays before the dealer.  
 
-int get_starting_cards(int card);
+int usr_first_cards;
+usr_first_cards = get_starting_cards();
 
 std::cout << "Your starting cards: " << usr_first_cards << std::endl;
 
@@ -78,7 +79,7 @@ std::cout << "hit? (y/n): " << std::endl;
 
 cin >> hitMe;
 
-while (hitMe == y)
+while (hit_me != 'n')
 {
   std::cout << "You entered: " << hitMe << std::endl;
 
@@ -191,17 +192,34 @@ return random_number;
 }
 
 // generate and print two random cards. players get two cards
-int get_starting_cards()
+int get_user_cards()
 {
-int card1;
-int card2;
+    int card_1, card_2, card_3, card_4, card_5;
+    int total_1, total_2, total_3, total_4;
 
-card1 = get_random_number();
-card2 = get_random_number();
+    card_1 = get_random_number();
+    card_2 = get_random_number();
+    card_3 = get_random_number();
+    card_4 = get_random_number();
+    card_5 = get_random_number();
+    total_1 = card_1 + card_2;
+    total_2 = card_1 + card_2 + card_3;
+    total_3 = card_1 + card_2 + card_3 + card_4;
+    total_4 = card_1 + card_2 + card_3 + card_4 + card_5;
 
-cout << card1 << "," << card2 << endl;
+    cout << "Your starting cards: " << card_1 << "," << card_2 << endl;
+    cout << "Total: " << total_1 << endl;
+
+    cout << "New card: " << card_3 << endl;
+    cout << "Total: " << total_2 << endl;
+
+    cout << "New card: " << card_4 << endl;
+    cout << "Total: " << total_3 << endl;
+
+    cout << "New card: " << card_5 << endl;
+    cout << "Total: " << total_4 << endl;
+
 }
-
 int get_new_card()
 {
 int card;

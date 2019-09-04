@@ -34,21 +34,21 @@ int card_5 = 0
         return 0;
 }
 
-std::cout << "Enter five numeric cards, no face cards. Use 2 - 9: " << std::endl;
-std::cout << "Card 1: " << std::endl;
-std::cin >> card_1 >> std::endl;
+cout << "Enter five numeric cards, no face cards. Use 2 - 9: " << endl;
+cout << "Card 1: " << endl;
+cin >> card_1 >> endl;
 
-std::cout << "Card 2: " << std::endl;
-std::cin >> card_2 >> std::endl;
+cout << "Card 2: " << endl;
+cin >> card_2 >> endl;
 
-std::cout << "Card 3: " << std::endl;
-std::cin >> card_3 >> std::endl;
+cout << "Card 3: " << endl;
+cin >> card_3 >> endl;
 
-std::cout << "Card 4: " << std::endl;
-std::cin >> card_4 >> std::endl;
+cout << "Card 4: " << endl;
+cin >> card_4 >> endl;
 
-std::cout << "Card 5: " << std::endl;
-std::cin >> card_5 >> std::endl;
+cout << "Card 5: " << endl;
+cin >> card_5 >> endl;
 
 
 // Your program should be able to recognize hand categories

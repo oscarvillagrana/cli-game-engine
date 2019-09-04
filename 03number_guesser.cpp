@@ -35,11 +35,11 @@ char play_again = y;
 
 while (play_again == y)
 
-std::cout << "Think of a number between 1 and 100: " ;
-std::cin >> user_number;
+cout << "Think of a number between 1 and 100: " ;
+cin >> user_number;
 
-std::cout << "Great! Do you want to play again? (y/n): " ;
-std::cin >> play_again;
+cout << "Great! Do you want to play again? (y/n): " ;
+cin >> play_again;
 
 return 0
 
@@ -53,9 +53,10 @@ char user_response;
 int low;
 int high;
 
-std::cout << "Is it: 0" << guess << "?  (h/l/c): ";
-std::cin >> user_response;
-std::cout << "\n";
+cout << "Is it: " << guess << "?  (h/l/c): ";
+cin >> entered_response;
+cout << "\n";
+
 switch (user_response)
 
 {
@@ -86,15 +87,16 @@ break;
 
 // takes two int parameters, and returns the midpoint of the two integers
 int getMidpoint(int low, int high)
-
+{
 int midpoint;
 
 midpoint = (high - low) % 2
 return midpoint
+}
 
 // returns a random number in between the low and high arguments
 int getRandomMidpoint(int low, int high)
-
+{
 int low = 0;
 int high = 0;
 
@@ -103,6 +105,7 @@ unsigned seed = time(0);
 srand(seed);
 
 random = 1 + rand() % 10;
+}
 
 /* sample run
 Think of a number between 1 and 100.

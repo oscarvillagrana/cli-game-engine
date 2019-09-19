@@ -58,33 +58,104 @@ cin >> card_5 >> endl;
 // Each function must accept an int array as a parameter.  
 // You can assume that the array will have five elements.  
 
+bool searchSingleInt()
+{
+    int size = 5;
+    int list[size] = {3, 3, 3, 4, 5};
+    int value = 3;
+
+    int pos = 0;
+    bool isFound = false;
+
+    while (!isFound && pos < size)
+    {
+        if (list[pos] == value)
+            cout << "1" << endl;
+            // isFound == true;
+            // if (isFound)
+        pos++;
+    }
+    return isFound;
+
+}
+
 
 // Pair: Two of the cards are identical
+// 2, 5, 3, 5, 7
 bool containsPair(int hand[])
-2, 5, 3, 5, 7
+{
+    int list[];
+    int size = 5;
+    int value;
+
+    int pos = 0;
+    bool isFound = false;
+
+    while (!isFound && pos < size)
+    {
+        if (list[pos] == value)
+            isFound == true;
+        pos++;
+    }
+    return isFound;
+}
+
 
 // Two Pair: Two different pairs
+// 2, 5, 3, 5, 3
 bool  containsTwoPair(int hand[])
-2, 5, 3, 5, 3
 
 // Three of a kind: Three matching cards
+// 5, 5, 3, 5, 7
 bool  containsThreeOfaKind(int hand[])
-5, 5, 3, 5, 7
 
 // Straight: Card values can be arranged in order, regardless of the order
 bool  containsStraight(int hand[])
-3, 4, 5, 6, 7
+{
+    const int arraySize = 5;
+    int hand[arraySize] = {3, 4, 5, 6, 7};
+    int toTheLeft[arraySize];
+    int toTheRight[arraySize];
+
+    for (int i = 0; i < arraySize; i++)
+    {
+        toTheLeft[i] = hand[i] - 1;
+        toTheRight[i] = hand[i] + 1;
+
+        cout << toTheRight[i] << endl;
+        cout << toTheLeft[i] << endl;
+
+        bool isStraight = true;
+        int pos = 0;
+
+        while (!isStraight && pos < arraySize)
+        {
+        if (hand[pos] == toTheLeft[pos])
+            isStraight == true;
+        else if (hand[pos] == toTheRight[pos])
+            isStraight == true;
+        pos++;
+        }
+
+        return isStraight;
+        if (isStraight)
+            cout << "Its straight!";
+    }
+
+}
+
+
 
 // Full House: A pair, and a three of a kind
+// 5, 7, 5, 7, 7
 bool  containsFullHouse(int hand[])
-5, 7, 5, 7, 7
 
 // Four of a kind: Four matching cards
+// 2, 5, 5, 5, 5
 bool  containsFourOfaKind(int hand[])
-2, 5, 5, 5, 5
 
 // High Card: No matching cards and not a straight
-2, 5, 3, 8, 7
+// 2, 5, 3, 8, 7
 
 High Card:
 If not one of the better hand types, then it is a High Card hands

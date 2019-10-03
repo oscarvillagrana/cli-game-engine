@@ -24,7 +24,7 @@ int main()
 void playOneGame() 
 {
 // playOneGame();
-    int guess = 0;
+    int guess = 50;
     int low;
     int high; 
     char play_again = 'y';
@@ -32,6 +32,9 @@ void playOneGame()
 
     while (entered_response != 'c')
     {
+
+        cout << "Think of a number between 1 and 100." << endl;
+
         entered_response = getUserResponseToGuess(guess);
 
         switch (entered_response)

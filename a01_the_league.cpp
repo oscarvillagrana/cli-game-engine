@@ -19,34 +19,87 @@
 // void displayData(string names[], int wins[], int size)
 // The main function should be very short. It should just declare the arrays and then call these three functions.
 
+#include <iostream>
+#include <string>
+using namespace std;
 
+void initializeArrays(string names[], int wins[], int size);
+void sortData(string names[], int wins[], int size);
+void displayData(string names[], int wins[], int size);
+void swapper(int& x, int& y);
+void swapperChar(string x, string y);
+
+main () 
+{
+
+    int size = 5;
+    string names[size];
+    int wins[size];
+    string team1;
+
+    initializeArrays(names, wins, size);
+    sortData(names, wins, size);
+    displayData(names, wins, size);
+
+}
 
 void initializeArrays(string names[], int wins[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        cout << "Enter team #" << i+1 << ": " << endl;
+        cin >> names[i];    
+        cout << "Enter the wins for team #" << i+1 << ": " << endl;
+        cin >> wins[i];
+    }
+}
 
+//sorts array of length size using bubblesort algorithm
 void sortData(string names[], int wins[], int size)
+{
+    bool swapped; //set swapped true if any swap occurs
+    do
+    {  
+        swapped = false;
+        for (int i = 0; i < (size-1); i++)
+        {
+            if (wins[i] < wins[i+1])
+            {
+                swapper(wins[i], wins[i+1]);
+                // swapperChar(names[i], names[i+1]);
+                swapped = true;
+            }
+        }
+    } while (swapped);
+}
+
+//swaps ints passed in by reference
+void swapper(int& x, int& y)
+{
+    int temp;
+
+    x = y;
+    y = temp;
+}
+
+// //swaps ints passed in by reference
+// void swapperChar(string x, string y)
+// {
+//     string temp;
+
+//     x = y;
+//     y = temp;
+// }
 
 void displayData(string names[], int wins[], int size)
+{
+    cout << "League Standings:" << endl;
 
-
-string names[];
-int wins[];
-int size;
-string team1;
-
-
-cout << "Enter team #1: " << endl;
-cout << "Enter the wins for team #1: " << endl;
-cout << "Enter team #2: " << endl;
-cout << "Enter the wins for team #2: " << endl;
-cout << "Enter team #3: " << endl;
-cout << "Enter the wins for team #3: " << endl;
-cout << "Enter team #4: " << endl;
-cout << "Enter the wins for team #4: " << endl;
-cout << "Enter team #5: " << endl;
-cout << "Enter the wins for team #5: " << endl;
-cout << "League Standings" << endl;
-
-
+    for (int i = 0; i < size; i++)
+    {
+        cout << names[i] << ": " << wins[i] << endl;
+    }
+}
 // The sample output from program:
 
 // Enter team #1: Padres

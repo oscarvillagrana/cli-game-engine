@@ -10,7 +10,7 @@ int main()
 
 
     const int NUM = 16;
-    
+
     long int creditCard[NUM_DIGITS];
  
     ifstream inputFile;
@@ -27,6 +27,7 @@ int main()
     inputFile >> creditCard;
     cout << "The credit card number is: " << creditCard << endl;
     
+
 
 
     inputFile.close();
@@ -59,9 +60,11 @@ void sortArray(int array[], int size)
 //swaps ints passed in by reference
 void swapper(int& x, int& y)
 {
-    int temp;
+    char temp;
+    char x;
+    char y;
     
-    temp = x;
+    char = x;
     x = y;
     y = temp;
 }

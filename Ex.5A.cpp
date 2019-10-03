@@ -29,3 +29,21 @@ exit(1);
 inputFile >> creditCard;
 cout << "The credit card number is: " << creditCard << endl;
 inputFile.close();
+
+for (i = 0; i < 20 ; i++)
+    inputFile >> creditCards[i];
+
+cout << "Enter a card number: " << endl;
+cint >> entered_card;
+
+int pos = 0;
+
+bool isFound = false;
+while (!isFound && pos < FileSize) 
+{
+    if (creditCards[pos] == entered_card)
+        isFound = true;
+    pos++;
+}
+
+if

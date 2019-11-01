@@ -2,81 +2,135 @@
 
 // Implement the following functions.  Each function deals with null terminated C-strings.  You can assume that any char array passed into the functions will contain valid, null-terminated data.  Your functions must have the signatures listed below.  
 
-int lastIndexOf(char *s, char target)
-void reverse(char *s)
-int replace(char *s, char target, char replacementChar)
-int findSubstring(char *s, char substring[])
-bool isPalindrome(char *s)
-void reverseWords(char *s)
+#include <string>
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int lastIndexOf(char *s, char target);
+void reverse(char *s);
+int replace(char *s, char target, char replacementChar);
+int findSubstring(char *s, char substring[]);
+bool isPalindrome(char *s);
+void reverseWords(char *s);
+void swapperChar(char& x, char& y);
+
+void testLastIndex();
+void testReverse();
+void testReplace();
+void testFindSubstring();
+void testIsPalindrome();
+void testReverseWords();
+
+int main()
+{
+    testLastIndex();
+    testReverse();
+    testReplace();
+    testFindSubstring();
+    testIsPalindrome();
+    testReverseWords();
+}
 
 // 1.  
 // This function returns the last index where the target char can be found in the string. 
 // it returns -1 if the target char does not appear in the string.  For example, if s is “Giants” and target is ‘a’ the function returns 2.
+
 
 int lastIndexOf(char *s, char target)
 {
     // assigns the last index
     int length = strlen(s);
 
-    // returns -1 if the target char does not appear
-    if (length <= 0)
+    int count = 0;          // count targets found
+    int hIndex = 0;         // highest index
+    int newIndex = 0;
+
+    // iterate through whole string
+    for(int i=0; i<length; i++)
     {
-        return -1;
+        // count how many target characters found
+        if(s[i] == target)
+        {
+            count+=1;
+            newIndex=i;
+        }
+
+        // assign highest index to variable
+        if(newIndex>hIndex)
+            hIndex=newIndex;
     }
+    // returns -1 if the target char does not appear
+    if (count < 1)
+        return -1;
     else 
-        return length - 1;
+        return hIndex;
 }
+
+void testLastIndex()
+{   
+    cout << "\n 1. LastIndex() \n" << endl;
+    const int MAX_CHARS = 128;
+    char slogan[MAX_CHARS] = "I have many apples!";
+
+    cout << slogan << endl;
+
+    int length = strlen(slogan);
+    char finding = 'a';
+
+    cout << "Char to search for: " << finding << endl;
+    cout << "Last location: " << lastIndexOf(slogan, finding) << endl;
+}
+
 
 // 2.  
 // This function alters any string that is passed in. It should reverse the string. 
 // If “flower” gets passed in it should be reversed in place to “rewolf”.  
 // To be clear, just printing out the string in reverse order is insufficient to receive credit, you must change the actual string to be in reverse order.
 
+
 void reverse(char *s)
 {
-    int size = strlen(s)+1;
+    int length = strlen(s)-1;
 
-    for (int j = size-1; j!=0; j--)
+    // iterate starting at the end of the array
+    for (int j = length; j!=0; j--)
     {
+        // swap the first element to the end of the array
         for (int i=0; i<j; i++)
         {
-        //now, swap the lowest element we found with element at position i
-        swapper(array[i],array[i+1]);
+            // char x= s[i];
+            // char y= s[i+1];
+            // swapper(&x,&y);
+
+            swapperChar(s[i],s[i+1]);
         }
     }
 }
 
-
-void swapper(int& x, int& y)
+void swapperChar(char& x, char& y)
 {
-    int temp;
-
-    temp = x;
+    char temp = x;
     x = y;
     y = temp;
 }
 
-//sorts array of length size using selection sort algorithm
-void selectionSort(int array[], int size)
+
+void testReverse()
 {
-    int lowestValue, lowestPosition;
-    for (int i=0; i<size-1; i++)
-    {
-        //first, find position of lowest element in positions i through size-1
-        lowestValue = array[i];
-        lowestPosition = i;
-        for (int j=i+1; j<size; j++)
-        {
-            if (array[j]<lowestValue)
-            {
-                lowestPosition = j;
-                lowestValue = array[j];
-            }
-        }
-        //now, swap the lowest element we found with element at position i
-        swapper(array[i],array[lowestPosition]);
-    }
+    cout << "\n 2. Reverse() \n" << endl;
+    const int MAX_CHARS = 128;
+    char slogan[MAX_CHARS] = "Go Giants!";
+
+    cout << slogan << endl;
+
+    reverse(slogan);
+
+    cout << "after: " << slogan << endl;    
+
 }
+
+
 
 // 3.  
 // This function finds all instances of the char ‘target’ in the string and replaces them with ‘replacementChar’.  
@@ -84,13 +138,11 @@ void selectionSort(int array[], int size)
 // If the target char does not appear in the string it returns 0 and does not change the string.  
 // For example, if s is “go giants”, target is ‘g’, and replacement is ‘G’, the function should change s to “Go Giants” and return 2.
 
+// works
 int replace(char *s, char target, char replacementChar)
 {
-
-
-    cout << "String: " << endl;
     int counter = 0;
-    length = s;
+    int length = strlen(s);
 
     // find the character
     for (int i=0; i<length; i++)
@@ -105,27 +157,73 @@ int replace(char *s, char target, char replacementChar)
     return counter;
 }
 
+
+void testReplace()
+{
+    cout << "\n 3. Replace() \n" << endl;
+    const int MAX_CHARS = 128;
+    char slogan[MAX_CHARS] = "Go Giants, all day long!";
+
+    cout << slogan << endl;
+
+    char target = 'a';
+    char replacementChar = 'o';
+
+    replace(slogan, target, replacementChar);
+    cout << "after: " << slogan << endl;    
+
+}
+
+
 // 4.  
 // This function returns the index in string s where the substring can first be found. 
 // For example if s is “Skyscraper” and substring is “ysc” the function would return 2.  
 // It should return -1 if the substring does not appear in the string.
 
+// works
 int findSubstring(char *s, char substring[])
 {
-    int length = strlen(s);
+    int length = strlen(s)+1;
     int foundSubstring = 0;
+    int subLength = strlen(substring);
+    int counter = 1;
     // find index of the string
-    for(i=0; i<length; i++)
+    for(int i=0; i<length; i++)
     {
         // compare two strings for equivalence
-        if(!strcmp(s, substring))
-            return [i]
-            foundSubstring += 1;
+        if(s[i]==substring[0])
+        {
+            for(int j=1; j<subLength; j++)
+            {
+                if(s[i+j]==substring[j])
+                    counter += 1;
+
+                    if(counter == subLength)
+                        return i;
+            }
+        }
     }
-    if (foundSubstring = 0)
+    if (counter == 1)
         return -1;
 }
 
+
+
+void testFindSubstring()
+{
+    const int MAX_CHARS = 128;
+
+    cout << "\n 4. FindSubstring() \n" << endl;
+    char slogan[MAX_CHARS] = "Go Giants!";
+
+    cout << slogan << endl;
+
+    char substring[MAX_CHARS] = "ants";
+
+    cout << "Substring: " << substring << endl;
+
+    cout << "Location: " << findSubstring(slogan,substring) << endl;
+}
 
 
 // 5. 
@@ -137,13 +235,44 @@ int findSubstring(char *s, char substring[])
 
 bool isPalindrome(char *s)
 {
-    if(s = reverse(s))
-        return true;
+    int length = strlen(s);
+    
+    // first make a copy of string
+    char scopy[length];
+
+    strcpy(scopy,s);
+
+    // then reverse the copy
+    reverse(scopy);
+    cout << scopy << endl;
+
+
+    // finally compare the two
+    if(strcmp(s,scopy) == 0)
+        cout << "True " << endl;
+        // return true;
     else
-        return false;
+        cout << "False " << endl;
+        // return false;
 }
 
 
+void testIsPalindrome()
+{
+    const int MAX_CHARS = 128;
+    char slogan[MAX_CHARS] = "hannah";
+    char slogan2[MAX_CHARS] = "Max";
+    
+    cout << "\n 5. IsPalindrome() \n" << endl;
+
+    cout << slogan << endl;
+    cout << isPalindrome(slogan) << endl;
+
+    cout << slogan2 << endl;
+    cout << isPalindrome(slogan2) << endl;
+    // cout << "after: " << slogan << endl;    
+
+}
 
 // 6. 
 // Extra Credit, up to 10 extra points.  
@@ -155,33 +284,133 @@ void reverseWords(char *s)
 {
     
     int length = strlen(s);
-    int SpaceIndex=0;
+    
+    cout << length << endl;
+    
+    int lastIndex=0;
+    int newIndex=0;
+    int spaceCount=0;
 
-    for (int i;i<length;i++)
+    for (int i=0;i<length;i++)
+    {   
+        // cout << "i: " << i << endl;
+        // find the space char
+        if (s[i] == ' ' or s[i] == '\0')
+        {    
+            newIndex = i;
 
+            // cout << "newIndex: " << newIndex << endl;
+            // cout << "i: " << i << endl;
 
-        
-        // find index of space
-        if (s[i] != ' ' || s[i] != '\0')
-            SpaceIndex = s[i];
-            
-            for (int j=0; j<=SpaceIndex; j++)
+            // iterate starting at the end of the array
+            for (int j = newIndex; j!=0; j--)
             {
+                // cout << "j: " << j << endl;
 
-                //now, swap the lowest element we found with element at position i
-                swapper(s[j],s[j+1]);
+                // swap the first element to the end of the array
+                for (int h=lastIndex; h<j-1; h++)
+                {
+                    // cout << "h: " << h << endl;
+                    swapperChar(s[h],s[h+1]);
+                    cout << s << endl;
+                }
             }
+            // cout << "lastIndex: " << lastIndex << endl;
+        }    
+        lastIndex = newIndex;
 
-
-    // Locate the first space, or the null terminator if there are no spaces
-    int WordCount=0;
-    while (userName[count] != ' ' && userName[count] != '\0')
-        count++ ;
-
-    // If a space was found , replace it with a null terminator .
-    if (userName[count] == ' ')
-        userName [count] = '\0';
+        spaceCount += 1;
+    }
 }
+
+void testReverseWords()
+{
+    cout << "\n 6. ReverseWords() \n" << endl;
+    const int MAX_CHARS = 128;
+
+    char slogan[MAX_CHARS] = "All in one full days work";
+
+    cout << slogan << endl;
+
+    reverseWords(slogan);
+
+    cout << "after: " << slogan << endl;    
+}
+
+
+// Sample Output
+
+//  1. LastIndex() 
+
+// I have many apples!
+// Char to search for: a
+// Last location: 12
+
+//  2. Reverse() 
+
+// Go Giants!
+// after: !stnaiG oG
+
+//  3. Replace() 
+
+// Go Giants, all day long!
+// after: Go Gionts, oll doy long!
+
+//  4. FindSubstring() 
+
+// Go Giants!
+// Substring: ants
+// Location: 5
+
+//  5. IsPalindrome() 
+
+// hannah
+// hannah
+// True 
+// 32
+// Max
+// xaM
+// False 
+// 32
+
+//  6. ReverseWords() 
+
+// All in one full days work
+// 25
+// lAl in one full days work
+// llA in one full days work
+// llA in one full days work
+// llAi n one full days work
+// llAin  one full days work
+// llAni  one full days work
+// llAni o ne full days work
+// llAni on e full days work
+// llAni one  full days work
+// llAni noe  full days work
+// llAni neo  full days work
+// llAni eno  full days work
+// llAni eno f ull days work
+// llAni eno fu ll days work
+// llAni eno ful l days work
+// llAni eno full  days work
+// llAni eno ufll  days work
+// llAni eno ulfl  days work
+// llAni eno ullf  days work
+// llAni eno lulf  days work
+// llAni eno lluf  days work
+// llAni eno lluf  days work
+// llAni eno lluf d ays work
+// llAni eno lluf da ys work
+// llAni eno lluf day s work
+// llAni eno lluf days  work
+// llAni eno lluf adys  work
+// llAni eno lluf ayds  work
+// llAni eno lluf aysd  work
+// llAni eno lluf yasd  work
+// llAni eno lluf ysad  work
+// llAni eno lluf syad  work
+// after: llAni eno lluf syad  work
+
 
 
 // You can get up to 5 extra credit points if you implement this correctly.  

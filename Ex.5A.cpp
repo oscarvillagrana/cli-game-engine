@@ -23,6 +23,7 @@ long int creditCard;
 ifstream inputFile;
 
 inputFile.open("creditcard.txt");
+
 if (!inputFile)
 {
     cout << "ERROR: Invalid filename\n";

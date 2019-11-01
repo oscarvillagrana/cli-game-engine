@@ -69,7 +69,7 @@ void pointerTasks () {
     p1 = &x;
 
     // Use p1 to set the value of x to 99
-    *pl = 99;
+    *p1 = 99;
 
     // Using cout and x, display the value of x
     cout << x << endl;
@@ -78,7 +78,7 @@ void pointerTasks () {
     cout << *p1 << endl;
 
     // Store the address of y into p1
-    pl = &y;
+    p1 = &y;
 
     // Use p1 to set the value of y to -300
     *p1 = -300;
@@ -95,9 +95,12 @@ void pointerTasks () {
     y = *p1;
 
     // Write a function with the following signature: . The function should accept the address of an int variable. If the value of this integer is negative then it should set it to zero
-    void noNegatives(int *x) {
-    if (*x < 0 )
-        *x = 0;
+    void noNegatives(int *x) 
+    {
+        if (x < 0 )
+        {
+            x = 0;
+        }
     }
 
     // Call the function twice: once with the address of x as the argument, and once with the address of y

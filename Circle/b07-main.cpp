@@ -1,111 +1,11 @@
-// b07-Circle-Class.cpp
+// b07-main.cpp
+
 // CS110B Assignment 9: Circle Class
 
 #include <string>
 #include <iostream>
+#include "b07-Circle.h"
 using namespace std;
-
-// When working on this assignment, focus on memorizing the syntax for writing classes.
-// Write a simple class named Circle, with three private variables: doubles named x, y and radius.  The center of the circle is denoted by coordinates (x,y), and the radius of the circle is denoted by radius.  It should have public member functions with the following signatures:
-
-class Circle
-{
-    private:
-    double x=0;
-    double y=0;
-    double radius=0;
-    public:
-    Circle();
-    Circle(double x,double y,double radius);
-    void setRadius(double r);
-    void setX(double value);
-    void setY(double value);
-    double getRadius() const 
-    { return radius; }
-    double getX() const 
-    { return x; }
-    double getY() const 
-    { return y; }
-    // returns the area of the circle
-    double getArea();
-    bool containsPoint(double xValue, double yValue);
-    // double printValue(double printValue);
-    // void printTest(double testToPrint);
-};
-
-// The first six member functions are straightforward functions to set and get the private member variables.
-// This member function should return the area of the circle. When you are calculating the area you can use 3.14 for pi.
-// The formula is radius * radius * pi.
-
-Circle::Circle()
-{
-    // testing the constructor
-    cout << "In the default Constructor!" << endl;
-}
-
-Circle::Circle(double a,double b,double c)
-{
-    // testing the constructor
-    cout << "In the custom Constructor!" << endl;
-    x = a;
-    y = b;
-    radius = c;
-}
-
-void Circle::setX(double value)
-{
-    x = value;
-}
-
-void Circle::setY(double value)
-{
-    y = value;
-}
-
-void Circle::setRadius(double r)
-{
-    radius = r;
-}
-
-// return the area of the circle
-double Circle::getArea()
-{
-    //  for pi
-    double pi = 3.14;
-    
-    int area = radius * radius * pi;
-
-    return area;
-}
-
-
-// This member function should return true if the point at (xValue, yValue) is contained in the circle, and false if not.  You can determine whether or not a point is in a circle by calculating the distance from the center of the circle (its x and y coordinates) to the point (parameters xValue, yValue).  If this distance is less than or equal to the radius then the point is inside the circle.  For your reference, here is how to calculate distance between two points.  
-
-
-// return true if the point at (xValue, yValue) is contained in the circle, and false if not
-bool Circle::containsPoint(double xValue, double yValue)
-{
-    if((xValue - x) * (xValue - x) + (yValue - y) * (yValue - y) <= radius * radius)
-    {    
-        cout << "True" << endl;
-        return true;
-    }
-    else
-    {
-        cout << "False" << endl;
-        return false;
-    }
-}
-
-// double Circle::printValue(double valueToPrint)
-// {
-//     cout << valueToPrint << endl;
-// }
-
-// void printTest(double testToPrint)
-// {
-//     cout << testToPrint << endl;
-// }
 
 // Write a main function that tests your class. It should instantiate a number of circle objects with different radius values and centers. 
 // You should test all your member functions until you are confident that they work. 
@@ -210,7 +110,55 @@ int main()
     cout << prevValue << myCircle.getArea() << endl;    
    
 }
-    
+
+// Sample output
+
+// In the custom Constructor!
+// X Value: 10
+// Y Value: 20
+// Radius: 30
+// Area: 2826
+// In the custom Constructor!
+// X Value: 3
+// Y Value: 4
+// Radius: 5
+// Area: 78
+// In the default Constructor!
+
+// --test get and set X
+// previous value: 0
+// value was set to: 2
+
+// --test get and set Y
+// previous value: 0
+// value was set to: 3
+
+// --test get and set Radius
+// previous value: 0
+// value was set to: 2
+
+// --test containsPoint
+// True
+// 1
+
+// --test containsPoint
+// False
+// 0
+
+// --test pointer setX
+// previous value: 2
+// value was set to: 5
+
+// --test pointer setY
+// previous value: 3
+// value was set to: 5
+
+// --test pointer setRadius
+// previous value: 2
+// value was set to: 5
+
+// --test getArea
+// previous value: 78
 
 // Implement the Circle class in separate .h and .cpp files.  
 // Circle.h contains your class declaration and 

@@ -3,9 +3,10 @@
 // CS110B Assignment 8: The League with Structs
 // Rewrite your league application from Assignment 6 so that each team/wins pair is stored in a struct named WinRecord.  Your program must meet the following requirements:
 
-
 #include <string>
+#include <cstring>
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 
@@ -14,19 +15,16 @@ using namespace std;
 struct WinRecord
 {
     int wins; 
-    // points to a dynamically allocated array of characters
-    char* name;
+    char* name;                                                    // points to a dynamically allocated array of characters
 };
 
-
-void swapper(char* x, char* y);
-void enterTeams();
-void allocateMemory();
-void reAllocateMemory();
-
+char* getLine();
 void initializeData(WinRecord* standings, int size);
 void displayData(WinRecord* standings, int size);
 void sortData(WinRecord* standings, int size);
+void deleteData(WinRecord* standings, int size);
+void charSwapper(char* x, char* y);
+void intSwapper(int& x, int& y);
 
 
 // 2.  Instead of using two parallel arrays like Assignment 6, the data must be stored in a single array -- a dynamically allocated array of WinRecord structs.  You must ask the user how many teams are in the league to determine how big this array needs to be and then dynamically allocate memory for it using new.  It must deallocate the memory when it is done with the array using delete [].
@@ -35,6 +33,7 @@ void sortData(WinRecord* standings, int size);
 
 int main()
 {
+
     const int MAX_CHAR = 128;
 
     WinRecord *standings = NULL;
@@ -43,67 +42,43 @@ int main()
 
     cout << "How many teams are in the league? " << endl;
     cin >> size;
-    cin.ignore();   
+    // for every cin we must clean out cin garbage so getLine function can work
+    cin.ignore();
 
     standings = new WinRecord[size];
 
     initializeData(standings,size);
+
+    // so close but I have an infinate loop:
+    // sortData(standings,size);
+
     displayData(standings,size);
-    deleteData(standings,size);
 
     
+    deleteData(standings,size);
     delete [] standings;
     standings = NULL;
 
 }
 
-void swapper(char* x, char* y)
+void charSwapper(char* x, char* y)
 {
     char temp = *x;
     *x = *y;
     *y = temp;
 }
 
-// for (int i = 0; i < size; i++)
-// {
-    
-//     cout << "Enter team name #" << i+1 << ": " << endl;
-//     cin >> standings->name[i];    
+//swaps ints passed in by reference
+void intSwapper(int& x, int& y)
+{
+    int temp = x;
 
-//     cout << "Enter the wins for team #" << i+1 << ": " << endl;
-//     cin >> standings->wins[i];
-
-//     // cout << "Enter team name #" << i+1 << ": " << endl;
-//     // cin >> *(standings->name + i);    
-    
-//     // cout << "Enter the wins for team #" << i+1 << ": " << endl;
-//     // cin >> *(standings->wins + i);
-
-//     standings++;
-// }
+    x = y;
+    y = temp;
 
 
-// // asks the user how many teams are in the league
-// void enterTeams(int size)
-// {
-//     cout << "How many teams are in the league? " << endl;
-//     cin >> size;
-// }
+}
 
-// // then dynamically allocate memory teams using new  
-// void allocateMemory(WinRecord *x, int size)
-// {
-//     x = new WinRecord[size];
-// }
-
-// // deallocates the memory when it is done with the array using delete [].
-// void reAllocateMemory(WinRecord *x)
-// {
-//     delete [] x;
-//     x = NULL;
-// }
-
-// 3.  Your program must use three functions that accept the array of WinRecord structs by address (i.e., pass a WinRecord pointer):
 
 // gets standings information from input using cin
 void initializeData(WinRecord* standings, int size)
@@ -119,25 +94,6 @@ void initializeData(WinRecord* standings, int size)
     }
 }
 
-
-void sortData(WinRecord* standings, int size)
-{
-    bool swapped; //set swapped true if any swap occurs
-        do
-    {  
-        swapped = false;
-        for (int i = 0; i < size; i++)
-        {
-            if (standings->wins[i] < standings->wins[i+1])
-            {
-                swapper(standings->wins[i], standings->wins[i+1]);
-                // swapperChar(names[i], names[i+1]);
-                swapped = true;
-            }
-        }
-    } while (swapped);
-}
-
 // prints standings information to screen
 void displayData(WinRecord* standings, int size)
 {
@@ -149,22 +105,53 @@ void displayData(WinRecord* standings, int size)
     }
 }
 
-
-// 4.  Note that the name field of each WinRecord struct is just a char* which you need to use to store a C-String.  For this assignment, you must use C-strings, not C++ string objects.  Unlike a C++ string object, the memory to store the actual character array for the C-String is not allocated for you automatically!  I encourage you to develop a function to do this on your own, but I have provided the getLine() function getLine.cpp to use if you wish.  Note that this function returns a line of text from the keyboard contained in a dynamically allocated array.  You will thus need to deallocate this memory using delete [] when you are done using any arrays you allocated using this function.  Note that this is in addition to de-allocating the array of WinRecord structs discussed in step 2 above!
-
-
 // deallocates memory for the created standing names
 void deleteData(WinRecord* standings, int size)
 {
     for (int i = 0; i < size; i++)
         {
-            cout << "Deleting name #" << i+1 << ": " << endl;
-            delete standings[i].name;
-            // delete *(standings->name + i);
+            delete standings[i].name;   
         }
 }
 
-// read in a line of text and return it in a dynamically allocated array
+
+// so close but I have an infinate loop
+void sortData(WinRecord* standings, int size)
+{
+    bool swapped = false; //set swapped true if any swap occurs
+    do
+    {  
+        for (int i = 0; i < size-1; i++)
+        {
+            swapped = false;
+            if (standings[i].wins < standings[i+1].wins)
+            {
+                cout << "Before sort # " << i+1 << " " << standings[i].wins << endl;
+                cout << "Before sort # " << i+1 << " " << standings[i+1].wins << endl;             
+                
+
+                intSwapper(standings[i].wins, standings[i].wins);
+
+                cout << "After sort # " << i+1 << " " << standings[i+1].wins << endl;             
+                cout << "After sort # " << i+1 << " " << standings[i].wins << endl;
+                
+                charSwapper(standings[i].name, standings[i].name);
+                // swapperChar(names[i], names[i+1]);
+                
+                swapped = true;
+            }
+            else
+                swapped = false;
+        }
+
+    }while (swapped);
+}
+
+// 4.  Note that the name field of each WinRecord struct is just a char* which you need to use to store a C-String.  For this assignment, you must use C-strings, not C++ string objects.  Unlike a C++ string object, the memory to store the actual character array for the C-String is not allocated for you automatically!  I encourage you to develop a function to do this on your own, but I have provided the getLine() function getLine.cpp to use if you wish.  Note that this function returns a line of text from the keyboard contained in a dynamically allocated array.  You will thus need to deallocate this memory using delete [] when you are done using any arrays you allocated using this function.  Note that this is in addition to de-allocating the array of WinRecord structs discussed in step 2 above!
+
+
+
+// Max Luttrels given function
 char* getLine() 
 {
   const int BUFFER_SIZE = 1000;
@@ -186,7 +173,17 @@ char* getLine()
 
   // Return the address of the dynamically allocated array
   return rValue;
-}   
+}
+
+// // getLine tester
+//     char name;
+//     cout << "Name? " << endl;
+//     cin >> getLine() >> name;
+//     cout << name << endl;
+
+// // deleteData tester
+// cout << "Deleting name #" << i+1 << ": " << endl;
+
 
 // allocates memory to store the actual character array for the C-String  
 
@@ -194,3 +191,19 @@ char* getLine()
 
 
 // 5.  As usual, provide sample output demonstrating your program works correctly and submit via Canvas.  
+
+// sample run
+
+// How many teams are in the league? 
+// 2
+// Enter team name #1: 
+// f
+// Enter the wins for team #1: 
+// 2
+// Enter team name #2: 
+// g
+// Enter the wins for team #2: 
+// 3
+// League Standings:
+// f: 2
+// g: 3

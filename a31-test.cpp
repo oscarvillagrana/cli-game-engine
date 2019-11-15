@@ -38,11 +38,14 @@ int main()
     standings = new WinRecord[size];
 
     initializeData(standings,size);
+
+    // so close but I have an infinate loop:
     sortData(standings,size);
-    deleteData(standings,size);
+
     displayData(standings,size);
 
     
+    deleteData(standings,size);
     delete [] standings;
     standings = NULL;
 
@@ -101,31 +104,37 @@ void deleteData(WinRecord* standings, int size)
         }
 }
 
+
+// so close but I have an infinate loop
 void sortData(WinRecord* standings, int size)
 {
-    bool swapped; //set swapped true if any swap occurs
-        do
-        {  
-        swapped = false;
+    bool swapped = false; //set swapped true if any swap occurs
+    do
+    {  
         for (int i = 0; i < size-1; i++)
         {
+            swapped = false;
             if (standings[i].wins < standings[i+1].wins)
             {
-                cout << "Sorting Data # " << i+1 << " " << standings[i].wins << endl;
-                cout << "Sorting Data # " << i+1 << " " << standings[i+1].wins << endl;             
+                cout << "Before sort # " << i+1 << " " << standings[i].wins << endl;
+                cout << "Before sort # " << i+1 << " " << standings[i+1].wins << endl;             
                 
 
                 intSwapper(standings[i].wins, standings[i].wins);
 
-                cout << "Sorting Data # " << i+1 << " " << standings[i].wins << endl;
-                cout << "Sorting Data # " << i+1 << " " << standings[i+1].wins << endl;             
+                cout << "After sort # " << i+1 << " " << standings[i+1].wins << endl;             
+                cout << "After sort # " << i+1 << " " << standings[i].wins << endl;
                 
-                // charSwapper(standings[i].name, standings[i].name);
+                charSwapper(standings[i].name, standings[i].name);
                 // swapperChar(names[i], names[i+1]);
+                
                 swapped = true;
             }
+            else
+                swapped = false;
         }
-    } while (swapped);
+
+    }while (swapped);
 }
 
 

@@ -250,9 +250,3 @@ Submit your answers to the GridWriter questions in a plain text file, e.g. GridW
 
 Reminder: no late homework submissions will be accepted after Thursday, 12/12 at 11:59pm, so make sure to submit before that.
 
-
-
-
-
-
-Published by Google Drive–Report Abuse–Updated automatically every 5 minutes

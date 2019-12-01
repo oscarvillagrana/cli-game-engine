@@ -41,9 +41,14 @@ Wikipedia’s Battleship Article
 
 Pogo.com’s Gabbleship Game
 
-Your assignment this week will be to work on the data structures for the game. We will be using four classes to represent the game entities: point, PointCollection, Ship, and Board.  
 
-The point and PointCollection classes have already been written for you.  The Ship class has been designed, and the member functions have been written as stubs.  The Board class has not yet been designed or implemented.  Download the beginning code for the project by clicking here: Battleship.zip
+
+// Your assignment this week will be to work on the data structures for the game. We will be using four classes to represent the game entities: point, PointCollection, Ship, and Board.  
+
+// The point and PointCollection classes have already been written for you.  
+// The Ship class has been designed, and the member functions have been written as stubs.  
+// The Board class has not yet been designed or implemented.  
+// Download the beginning code for the project by clicking here: Battleship.zip
 
 The One Player Game
 
@@ -113,9 +118,13 @@ Miss.
 
 6 ~  ~  ~  ~  ~  .  ~  ~  ~  ~
 
+                 . 
+
 5 ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
 
 4 ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
+
+     .  .  .  .  .
 
 3 ~  ~  ~  ~  ~  ~  ~  ~  ~  ~
 
@@ -132,16 +141,31 @@ Enter a coordinate:
 
 When the user sinks a ship, the game should say: “you sank a ship with length 2!” where 2 is replaced by the length of the ship that was sunk.  When all four ships are sunk, the game should end.
 
+
+
+
 This week you will begin the project by completing the Ship class, and writing up some design ideas for the Board class.
 
 
-Point and PointCollection Classes: Two classes have already been written and tested for you.  The Point class, which stores a single point, and the PointCollection class which dynamically stores a collection of points.  The PointCollection class is similar to the IntCollection class you wrote for a previous assignment.  Take a close look at these classes, and think of how you can take advantage of the functions already written for you.  We will NOT be using a 2-dimensional array to store the data for the battleship board.  We will store the location of each ship using a collection of point objects.  We will also use point objects to store all of the shots that count as misses.
+Point and PointCollection Classes: Two classes have already been written and tested for you.  
+The Point class, which stores a single point, and the PointCollection class which dynamically stores a collection of points.  
+The PointCollection class is similar to the IntCollection class you wrote for a previous assignment.  
+Take a close look at these classes, and think of how you can take advantage of the functions already written for you.  
+We will NOT be using a 2-dimensional array to store the data for the battleship board.  
+We will store the location of each ship using a collection of point objects.  
+We will also use point objects to store all of the shots that count as misses.
 
-Ship Class: The .h file for the ship class has already been written.  The member functions in Ship.h all have empty stubs in Ship.cpp.  You can complete the Ship class by filling these stubs in with the necessary logic.
+
+
+Ship Class: The .h file for the ship class has already been written.  The member functions in Ship.h all have empty stubs in Ship.cpp.  
+You can complete the Ship class by filling these stubs in with the necessary logic.
 
 The Ship class has the following member constructors and member functions:
 
-Ship(point originPoint, direction orientationDirection, int lengthValue) - this constructor accepts the origin or the ship (its lowest, leftmost point), its length, and its orientation (horizontal or vertical).  It should use this information to fill in its PointCollection.
+Ship(point originPoint, direction orientationDirection, int lengthValue) - this constructor accepts the origin or the ship (its lowest, leftmost point), 
+its length
+its orientation (horizontal or vertical).  
+It should use this information to fill in its PointCollection.
 
 
 Ship(const Ship&) -  A copy constructor.
@@ -171,7 +195,10 @@ bool isSunk()  -  Returns true if the ship is sunk.
 Board Class: The Board class has not been written yet.  If this class is well designed, then it should be easy to write the rest of the game.  
 
 
-You will be submitting a written description of your thoughts on the Board class. The most important part of this is a list of member data, member functions, and constructors that the class would have, and your thoughts on how a program with a user interface would use them.  Your write up can consist of a few sentences and some bullet points.  There is no need to spend too much time on this.
+You will be submitting a written description of your thoughts on the Board class. 
+The most important part of this is a list of member data, member functions, and constructors that the class would have, and your thoughts on how a program with a user interface would use them.  
+Your write up can consist of a few sentences and some bullet points.  
+There is no need to spend too much time on this.
 
 
 Testing
@@ -191,6 +218,4 @@ What to submit?
 
 Submit two files: your completed Ship.cpp file, and a text file containing a writeup on your design for a Board class.  This week, there is no need for a sample output file.  I must be able to take your Ship.cpp file, replace the one in Battleship.zip with it, and compile and run on hills.  No credit will be given for submissions which do not compile on hills in this fashion.
 
-
-Published by Google Drive–Report Abuse–Updated automatically every 5 minutes
 */

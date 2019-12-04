@@ -1,49 +1,79 @@
-// b26-intCollection.cpp
+// IntCollection class implementation
+// CS 110B Max Luttrell
 
-// Assignment 11 - Int Collection
-// CS110B Assignment 11: Int Collection
-
-#include "IntCollection.cpp"
+#include "IntCollection.h"
 #include <iostream>
 using namespace std;
 
+// ***********************************************************//
+// **********************included code************************//
+// ***********************************************************//
 
+IntCollection::IntCollection()
+{
+  //initialize member data to reflect an empty IntCollection
+  size = capacity = 0;
+  data = NULL;
+}
 
-// Take a close look at the code in IntCollection.zip on my web site. The IntCollection class is a dynamic storage mechanism for storing integers.  It could be used in place of an integer array.  
+void IntCollection::addCapacity()
+{
+  //create a new, bigger buffer, copy the current data to it, delete 
+  //the old buffer, and point our data pointer to the new buffer
+  //
+  //note: there is a more efficient way to do this using the C 
+  //memory management function realloc(), but that is beyond the 
+  //scope of our course
+  int *newData;
+  capacity += CHUNK_SIZE;
+  newData = new int[capacity];
+  for (int i=0; i<size; i++)
+    newData[i] = data[i];
+  delete [] data;
+  data = newData;
+}
 
-// For this assignment you will add a copy constructor, a destructor, and three overloaded operators to the IntCollection class.  In the design diagram below, the black member functions represent code that has already been implemented.  You will be implementing the green items.  Each item that you will be adding to the class is described below the diagram.
+void IntCollection::add(int value)
+{  
+  //first, allocate more memory if we need to
+  if (size == capacity)
+    addCapacity();
 
-// class IntCollection 
-// {
-//   private:
-//     int size            // the number of ints currently stored in the int collection
-//     int capacity        // total number of elements available in data array
-//     int* data           // a pointer to the dynamically allocated data array
-//     void addCapacity(); // private function to allocate more memory if necessary
-//   public:
-//     IntCollection()
-//     ~IntCollection()
-//     IntCollection(const IntCollection &c)
-//     void add(int value)
-//     int get(int index)
-//     int getSize()
-//     IntCollection& operator=(const IntCollection &c)
-//     bool operator==(const IntCollection &c)
-//     IntCollection& operator<<(int value)
-// }
+  //now, add the data to our array and increment size
+  data[size++] = value;
+}
+
+int IntCollection::get(int index)
+{  
+  if (index<0 || index>=size)
+  {
+  	cout << "ERROR: get() trying to access index out of range.\n";
+  	exit(1);
+  }
+
+  return data[index];
+}
+
+int IntCollection::getSize()
+{
+	return size;
+}
+
+// ***********************************************************//
+// *************************my code***************************//
+// ***********************************************************//
+
 
 // 1. The Copy Constructor
 // The copy constructor should perform a deep copy of the argument object, 
 // i.e. it should construct an IntCollection with the same size and capacity as the argument, 
 // with its own complete copy of the argument's data array.
 
-IntCollection::IntCollection(const IntCollection &c)      // copy constructor, to be added!
+IntCollection::IntCollection(IntCollection &c)      // copy constructor, to be added!
 {
-  cout << "In the copy constructor!\n";
-  size = c.getSize();
-  add(size);
-  for (int i=0; i<size; i++)
-    data[i] = c.get(i);
+  cout << " ---- in copy constructor ---- " << endl;
+
+  *this = c;
 }
 
 
@@ -53,12 +83,25 @@ IntCollection::IntCollection(const IntCollection &c)      // copy constructor, t
 // e.g. a = b = c.  
 // If you implement your assignment operator first it could be used in the copy constructor, but this is not a requirement.
 
-IntCollection& IntCollection::operator =(const IntCollection &c) // to be added!
+IntCollection& IntCollection::operator =(IntCollection &c) // to be added!
 {
+  cout << " ---- in Assignment Operator ---- " << endl;
+
+  // I removed delete because it created following error:
+  // munmap_chunk(): invalid pointer
+  // Aborted (core dumped)
+
+  // delete [] data;
+
   size = c.getSize();
-  add(size);
+
+  capacity = c.capacity;
+
+  data = new int[size];
+
   for (int i=0; i<size; i++)
     data[i] = c.get(i);
+
   return *this;
 }
 
@@ -67,11 +110,24 @@ IntCollection& IntCollection::operator =(const IntCollection &c) // to be added!
 // The "is equals" operator should return true if the argument object has the same size as the receiving object, 
 // and the values in both objects’ data arrays are identical.
 
-bool IntCollection::operator ==(const IntCollection &c)    // to be added!
+bool IntCollection::operator ==(IntCollection &c)    // to be added!
 {
+  cout << " ---- in Equals Operator ---- " << endl;
+
   if (c.getSize() == getSize())
-    if (c.get() == get())
-      return true;
+  {
+    for (int i=0; i<size; i++)
+    {
+        if (c.get(i) == get(i))
+          cout << "true" << endl;
+    }
+    cout << "finaly true" << endl;
+    return true;
+
+  }
+  else
+    cout << "false" << endl;
+    return false;
 }
 
 // 4. The insertion operator (<<). 
@@ -83,6 +139,8 @@ bool IntCollection::operator ==(const IntCollection &c)    // to be added!
 
 IntCollection& IntCollection::operator <<(int value)     // to be added!
 {
+  cout << " ---- in Insertion Operator ---- " << endl;
+
   //first, allocate more memory if we need to
   if (size == capacity)
     addCapacity();
@@ -101,36 +159,9 @@ IntCollection& IntCollection::operator <<(int value)     // to be added!
 
 IntCollection::~IntCollection()                 // destructor, to be added!
 {
-  cout << "In the destructor!\n";
+  cout << " ---- in destructor ---- " << endl;
   delete [] data;
   data = NULL;
-}
-
-
-// 6.  addCapacity
-// Note that addCapacity() is a private member function.  
-// What happens if you try to call it from outside the class, i.e. by adding the line below to main()?
-// c.addCapacity();
-
-
-
-// The following code creates an IntCollection object named ‘c’.  It adds seven integers to ‘c’, then uses a for loop to display the seven integers:
-
-
-int main()
-{
-  IntCollection c;
-  c.add(45);
-  c.add(-210);
-  c.add(77);
-  c.add(2);
-  c.add(-21);
-  c.add(42);
-  c.add(7);
-  for (int i = 0; i < c.getSize(); i++)
-  {
-    cout << c.get(i) << endl;
-  }
 }
 
 

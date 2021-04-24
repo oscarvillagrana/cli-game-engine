@@ -1,4 +1,4 @@
-Ex.5A.cpp
+//Ex.5A.cpp
 
 void sortArray(int array[], int size)
 {

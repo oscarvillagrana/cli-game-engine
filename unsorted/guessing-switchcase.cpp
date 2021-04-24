@@ -1,3 +1,7 @@
+// Guessing Game
+
+// Uses Switch Cases
+
 #include <iostream>
 
 using namespace std;

@@ -1,5 +1,6 @@
-Ex.8A.cpp
+//Ex.8A.cpp
 
+// prints number of burritos sold 
 
 #include <string>
 #include <iostream>

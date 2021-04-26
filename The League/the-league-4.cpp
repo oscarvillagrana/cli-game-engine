@@ -1,3 +1,5 @@
+// a31-test.cpp
+
 #include <string>
 #include <cstring>
 #include <iostream>
@@ -170,3 +172,19 @@ char* getLine()
 
 // // deleteData tester
 // cout << "Deleting name #" << i+1 << ": " << endl;
+
+
+int getline_tester() {
+  char *name;
+
+  cout << "String: ";
+  name = getLine();
+  cout << name << endl;
+
+  // we are done with name now, return memory to system 
+  // and set to NULL
+  delete [] name;      
+  name = NULL;
+
+  return 0;
+}

@@ -8,6 +8,7 @@
 
 
 #include <iostream>
+#include <map>
 using namespace std;
 
 #ifndef ASTERISKS_GAME_DEF
@@ -24,15 +25,34 @@ namespace ast
 {
    enum runcode { FAIL = 0, OK = 1, NO_FILE = -1 };
 
+
    //-------------------------------------------------------------------------------
    // GAME ENGINE BASE CLASS - Starts the game with defaults                     
    //-------------------------------------------------------------------------------
    class GameEngine
    {
+
+      string gameToPlay;
+
+      multimap<int,string> games = { {1,"asterisks"},
+                                     {2,"poker"} };
+
+   
    public:
       GameEngine() {
          //TODO:
-         cout << "Default" << endl;
+         cout << "Welcome to the games" << endl;
+
+         cout << "Which game would you like to play? " << endl;
+         
+         for (auto elem : games) {
+            
+            cout << elem.second << '(' << elem.first << ')' << endl;
+
+         }
+
+         cin >> gameToPlay;
+         cout << gameToPlay;
       };
    public:
       //TODO:

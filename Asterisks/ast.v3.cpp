@@ -8,27 +8,57 @@
 
 
 #include <iostream>
+#include <stdint.h>
 #include <map>
 using namespace std;
 
-#ifndef ASTERISKS_GAME_DEF
-#define ASTERISKS_GAME_DEF
+// TODO: utils
+struct preciseInts
+{         
+   // signed integers precise bits
+   int8_t SmallInt = 0;                       //has max of 127
+   int16_t MediumInt;
+   int32_t LargeInt;
+   int64_t HugeInt;
+
+   //unsigned precise integers
+   uint8_t SmallUInt = 0;                       //has max of 127
+   uint16_t MediumUInt;
+   uint32_t LargeUInt;
+   int64_t HugeUInt;
+
+};
 
 
 //-------------------------------------------------------------------------------
 // interface
 //-------------------------------------------------------------------------------
 
+#pragma region ge_declaration
 
-namespace ast
+#ifndef GE_DEF
+#define GE_DEF
+
+namespace ge
 // gameEngine.h
 {
    enum runcode { FAIL = 0, OK = 1, NO_FILE = -1 };
 
+   //-------------------------------------------------------------------------------
+   // BASE CLASS - Starts the game with defaults                     
+   //-------------------------------------------------------------------------------
 
-   //-------------------------------------------------------------------------------
-   // GAME ENGINE BASE CLASS - Starts the game with defaults                     
-   //-------------------------------------------------------------------------------
+   class Game
+   {
+   public:
+      Game(int8_t id = 0, string name = "")
+      {};
+   private:
+      int8_t id = 0;
+      string name = "";
+      Game() = delete;
+   };
+
    class GameEngine
    {
 
@@ -40,43 +70,48 @@ namespace ast
    
    public:
       GameEngine() {
+      };
+   public:
+      //TODO:
+      ge::runcode Constructor(Game x) {
+         cout << "Constructed" << endl;
          //TODO:
          cout << "Welcome to the games" << endl;
-
-         cout << "Which game would you like to play? " << endl;
-         
-         for (auto elem : games) {
-            
+         cout << "Which game would you like to play? " << endl;        
+         for (auto elem : games) {           
             cout << elem.second << '(' << elem.first << ')' << endl;
-
          }
 
          cin >> gameToPlay;
          cout << gameToPlay;
-      };
-   public:
-      //TODO:
-      ast::runcode Constructor(int x) {
-         cout << "Constructed" << endl;
          return OK;
       };
       //TODO:
-      ast::runcode Start() {
+      ge::runcode Start() {
          cout << "Started" << endl;
       };
    };
 }
 
-#endif // ASTERISKS_GAME_DEF
+#pragma endregion
+
+#endif // GE_DEF
 
 
 //-------------------------------------------------------------------------------
 // implementation
 //-------------------------------------------------------------------------------
 
+#ifndef ASTERISKS_GAME_DEF
+#define ASTERISKS_GAME_DEF
+
+
+#pragma region ge_implementation
+// namespace ge
+
 
 // ASTERISKS_GAME.cpp
-class ASTERISKS_GAME : public ast::GameEngine 
+class ASTERISKS_GAME : public ge::Game
 {
 
    // default values
@@ -90,9 +125,14 @@ class ASTERISKS_GAME : public ast::GameEngine
 
    string algoInput;
 
+   ASTERISKS_GAME() = delete;
 public:
 
    ALGORITHM algo = GO_AGAIN_NO;
+
+   ASTERISKS_GAME( int8_t id , string name)
+      : Game ( id, name )
+   {}
 
 
    bool SetValues()
@@ -136,12 +176,18 @@ public:
 
 };
 
+#pragma endregion
+
+#endif // ASTERISKS_GAME_DEF
+
 
 int main()
 {
-   ASTERISKS_GAME game;
-   if (game.Constructor(0)) {
-      game.SetValues();
+   ASTERISKS_GAME asterisks_game(0, "asterisks");
+   // cout << "found";
+   ge::GameEngine game;
+   if (game.Constructor(asterisks_game)) {
+      // game.SetValues();
       // game.OnValueUpdate(demo.algo);     
       game.Start();
    }

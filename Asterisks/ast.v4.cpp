@@ -43,6 +43,7 @@ namespace ge
 // gameEngine.h
 {
   enum runcode { FAIL = 0, OK = 1, NO_FILE = -1 };
+  enum gameName { ASTERISKS, POKER };
 
    //-------------------------------------------------------------------------------
    // BASE CLASS - Starts the game with defaults                     
@@ -52,18 +53,20 @@ namespace ge
   {
   private:
     uint8_t _id = 0;
-    string _name = "";
+    string _namestr = "";
+    gameName _name = ASTERISKS;
 
     // Game( Game & );                           // no copy constructor
     Game operator = ( Game & );               // no assignment operator
     Game(){};                                 // no default constructor
 
   public: // Constructors
-    Game( const uint8_t & id, const string & name );
+    Game( const uint8_t & id, const string & name, const gameName & gameName );
   
   public: // Member functions
     const uint8_t & id() const;
-    const string & name() const;
+    const gameName & name() const;
+    const string & namestr() const;
   };
 
   class GameEngine
@@ -84,11 +87,8 @@ namespace ge
   
   public: // member functions
     std::vector<ge::Game> _games;
-    //TODO:
     GameEngine(std::vector<ge::Game> vec);
-    //TODO:
-    ge::runcode start(string game);
-    // //TODO: 
+    ge::runcode start(gameName game);
     char setGoAgain(char c);
     char getGoAgain();
     goAgain setGoAgain2(char c);
@@ -128,10 +128,11 @@ namespace ge
   // BASE CLASS - Starts the game with defaults                     
   //-------------------------------------------------------------------------------
 
-  Game::Game( const uint8_t & id, const string & name )
-  : _id(id), _name(name) {};
+  Game::Game( const uint8_t & id, const string & name, const gameName & gameName )
+  : _id(id), _namestr(name), _name(gameName) {};
   const uint8_t & Game::id() const { return _id; }
-  const string & Game::name() const { return _name; }
+  const ge::gameName & Game::name() const { return _name; }
+  const string & Game::namestr() const { return _namestr; }
 
   // GameEngine::GameEngine(){};
 
@@ -141,7 +142,7 @@ namespace ge
     cout << "Constructed" << endl;
   };
     //TODO:
-  ge::runcode GameEngine::start(string game) 
+  ge::runcode GameEngine::start(ge::gameName game) 
   {
     cout << "Started" << endl;
     //TODO:
@@ -209,8 +210,8 @@ class ASTERISKS_GAME : public ge::Game
 
 public:
   ALGORITHM algo = GO_AGAIN_NO;
-  ASTERISKS_GAME( int8_t id , string name)
-    : Game ( id, name ) {}
+  ASTERISKS_GAME( int8_t id , string name, ge::gameName gameName)
+    : Game ( id, name, gameName ) {}
 
   bool SetValues()
   {
@@ -279,12 +280,12 @@ int main()
 {
   if(testing == true) { test(); return 0; }
 
-  ASTERISKS_GAME asterisks_game(0, "asterisks");
+  ASTERISKS_GAME asterisks_game(0, "asterisks", ge::ASTERISKS);
 
   std::vector<ge::Game> vec;
   vec.reserve(2);
-  vec.emplace_back(uint8_t(0), string("asterisks"));
-  vec.emplace_back(1, "poker");
+  vec.emplace_back(uint8_t(0), string("asterisks"), ge::ASTERISKS);
+  vec.emplace_back(1, "poker", ge::POKER);
 
   // TODO: convert int to string
   // cout << 0 << endl;
@@ -344,38 +345,38 @@ void test()
   // Vector constructors
   //--------------------
 
-  std::vector<ge::Game> vec;
-  vec.reserve(2);
-  vec.emplace_back(uint(0), string("asterisks"));
-  vec.emplace_back(uint8_t(1), "poker");
+//   std::vector<ge::Game> vec;
+//   vec.reserve(2);
+//   vec.emplace_back(uint(0), string("asterisks"), ASTERISKS);
+//   vec.emplace_back(uint8_t(1), "poker", POKER);
 
-  for( ge::Game i : vec ){
-    cout << i.name() << endl;
-  }
-
-
-  // Go Again
-  //------------
-
-  ge::GameEngine games(vec);
-  games.setGoAgain2('y');  
-    // print results
-  cout << games.getGoAgain2() << endl;
+//   for( ge::Game i : vec ){
+//     cout << i.name() << endl;
+//   }
 
 
-  // Game Engine
-  //------------
+//   // Go Again
+//   //------------
 
-  // manual construtors with normal array not fun
-  // ge::Game games[2] = { {4,"yep"},
-  //                       {3,"word"}
-  //                     };
+//   ge::GameEngine games(vec);
+//   games.setGoAgain2('y');  
+//     // print results
+//   cout << games.getGoAgain2() << endl;
 
 
-  ge::GameEngine a(vec);
-  a.setGoAgain('y');
-  cout << a.getGoAgain() << endl;
-  a.start(a.getGameSelected());
+//   // Game Engine
+//   //------------
+
+//   // manual construtors with normal array not fun
+//   // ge::Game games[2] = { {4,"yep"},
+//   //                       {3,"word"}
+//   //                     };
+
+
+//   ge::GameEngine a(vec);
+//   a.setGoAgain('y');
+//   cout << a.getGoAgain() << endl;
+//   a.start(a.getGameSelected());
 }
 
 

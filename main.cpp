@@ -82,14 +82,14 @@ namespace ge
   class Game
   {
   private:
-    uint8_t _id = 0;
-    string _name = "";
-    game_enum _game_enum = ASTERISKS;
 
     // Game( Game & );                           // no copy constructor
     Game operator = ( Game & );               // no assignment operator
     Game(){};                                 // no default constructor
-
+  public: // Constructors
+    uint8_t _id;
+    string _name;
+    game_enum _game_enum;
   public: // Constructors
     Game( const uint8_t & id, const string & name, const game_enum & game_enum );
   
@@ -112,8 +112,8 @@ namespace ge
   private:
     enum goAgain { NO = 0, YES = 1 };
     char _goAgainChar = 'n';
+  public:
     goAgain _goAgainEnum = NO;
-
     string _gameToPlay;
     string _gameSelected = "NONE";
 
@@ -204,6 +204,7 @@ namespace ge
     // cout << "Started" << endl;
     cout << "Welcome to the games" << endl;
     cout << "Which game would you like to play? " << endl;        
+
 
     // for (auto g : _games ) {
     //   cout << g.name() << '(' << int(g.id()) << ')' << endl;
@@ -368,25 +369,32 @@ int main()
   //----------------------
 
   // msg( "get Go Again Enum", games.getGoAgainEnum());
-  msg( "set Go Again Enum?");
 
 
   // TODO: convert from string to const char?
-  // games.setGoAgain("n");
+  // msg("_goAgainEnum",games._goAgainEnum);
+
+  do{
 
 
-  if (games.start(asterisks_game.get_game_enum())) {
+    if (games.start(asterisks_game.get_game_enum())) {
+
+        // for( ge::Game i : vec ){
+        //   msg( "game id", int(i.id()));
+        // }          
+
+      // game.SetValues();
+      // game.OnValueUpdate(demo.algo);     
+      // game.start();
+    }
 
 
-      // for( ge::Game i : vec ){
-      //   msg( "game id", int(i.id()));
-      // }
-        
+    string temp;
+    msg( "set Go Again Enum?");
+    cin >> temp;
+    games.SetGoAgain(temp);
+  } while(games._goAgainEnum);
 
-    // game.SetValues();
-    // game.OnValueUpdate(demo.algo);     
-    // game.start();
-  }
 
 
 

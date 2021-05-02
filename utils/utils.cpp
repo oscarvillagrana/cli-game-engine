@@ -34,7 +34,10 @@ template <typename T> void msg( const char * m, const T & v );
 
 
 template <typename T> 
-void msg( T & m ) { cout << m << endl; }
+void msg( T & m ) { 
+   std::flush(cout);
+   cout << m << endl; 
+}
 template <typename T> 
 void msg( const char * m, const T & v ) { cout << m << ": " << v << endl; }
 
@@ -59,9 +62,32 @@ struct preciseInts
 
 
 //-------------------------------------------------------------------------------
+// Multimap
+//-------------------------------------------------------------------------------
+
+
+// template <typename T>
+// T getElem(multimap)
+//    for (auto elem : games) {
+//       if(elem.first == Asterisks) { cout << "0" << endl;}
+//       // cout << elem.second << '(' << elem.first << ')' << endl;
+//    }
+
+
+//-------------------------------------------------------------------------------
 // Utils Tests
 //-------------------------------------------------------------------------------
 
+
+// struct vs class
+
+// struct a {
+//   int id = 0;
+//   enum b {
+//     c
+//   };
+//   string name = "d";
+// };
 
   
 // Utils / integral sizes
@@ -72,19 +98,61 @@ struct preciseInts
 // int8_t imin = -128;    cout << int(imin) << endl;
 
 
+
 //----------------------------------------------------------------------------------
 // Sanitize  Input
 //----------------------------------------------------------------------------------
 
 
 // Sanitize Int
-int HandleInputIntRange( int i, int j)
+// Returns int if within given range, else returns negative
+int HandleInputIntRange( int min, int max)
 {
+
    int n = 0;
 
    for (;;) {
 
-      std::cin >> n;
+      string line;
+
+      // std::cin.clear();
+      // std::cin.ignore(10000, '\n');
+      getline(cin, line);
+
+      // convert string to int
+      try { n = stoi(line); }
+      catch (const exception& e) { n = -1; }
+
+      // if (std::cin.fail()) {
+      //    std::cin.clear();
+      //    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+      //    continue;
+      // }
+
+      // valid range
+      if (n < min) { n = -1; }
+      if (n > max) { n = -1; }
+
+      return n;
+   }
+}
+
+ 
+// Sanitize String
+string HandleInputStrRange( int start, int end)
+{
+   string n;
+
+   string a(end, '\0');
+
+   for (;;) {
+
+      std::getline(std::cin, n);
+
+      for ( int i = start; i < end; i++ )
+      {
+         a[i] = n[i];
+      }
 
       if (std::cin.fail()) {
          std::cin.clear();
@@ -92,14 +160,21 @@ int HandleInputIntRange( int i, int j)
          continue;
       }
 
-      // number range
-      if (n < i || n > j) {
-         continue;
-      }
-
-      return n;
-
+      return a;
    }
-
 }
  
+
+bool HandleInputBool()
+{ 
+   // std::cin.clear();
+   // std::cin.ignore(10000, '\n');
+
+   string input;
+   getline(cin,input);
+   if( input == "n") { return false; }
+   else { return true; }
+}; 
+
+
+

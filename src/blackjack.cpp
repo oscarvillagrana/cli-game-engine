@@ -62,7 +62,7 @@ d_total = 0;
       if (total >= 22)
       { 
         cout << "Bust. " << "You Loose" << endl;
-        exit(0);
+        return 0;
       }
       cout << "hit? (y/n): ";   
       cin >> play_again;
@@ -70,13 +70,13 @@ d_total = 0;
   if (total == 21)
   {
   cout << "Blackjack " << "You Win" << endl;
-  exit(0);
+  return 0;
   }
       // check if bust
   if (total >= 22)
   {
       cout << "Bust. " << "You Loose" << endl;
-      exit(0);
+      return 0;
   }   
 
 // dealer
@@ -99,13 +99,13 @@ d_total = 0;
       if (d_total >= 22)
       { 
         cout << "Dealer Busts. " << "You Win" << endl;
-        exit(0);
+        return 0;
       }
   }
   if (d_total == 21)
   {
       cout << "Blackjack " << "You Loose" << endl;
-      exit(0);
+      return 0;
   }
   cout << "Dealer stays with " << d_total << endl;
       // check if bust
@@ -125,7 +125,7 @@ d_total = 0;
       if (total >= 22)
       { 
         cout << "Bust. " << "You Loose" << endl;
-        exit(0);
+        return 0;
       }
       cout << "Dealer's total: " << d_total << endl;
       cout << "hit? (y/n): ";   
@@ -134,13 +134,13 @@ d_total = 0;
   if (total == 21)
   {
   cout << "Blackjack " << "You Win" << endl;
-  exit(0);
+  return 0;
   }
       // check if bust
   if (total >= 22)
   {
       cout << "Bust. " << "You Loose" << endl;
-      exit(0);
+      return 0;
   }   
 
 

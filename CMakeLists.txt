@@ -9,8 +9,8 @@ project(main VERSION 1.0)
 #add_subdirectory(src)
 
 
-add_subdirectory(src/utils)
-add_library( utils  src/utils/utils.cpp )
+add_subdirectory(utils)
+add_library( utils  utils/utils.cpp )
 
 
 #TODO: is this next line needed? removing adds warning

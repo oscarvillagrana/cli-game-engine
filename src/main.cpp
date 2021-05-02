@@ -13,7 +13,8 @@
 #include <vector>
 #include <stdint.h>
 #include <map>
-#include "utils/utils.cpp"
+#include "../utils/utils.cpp"
+#include "blackjack.cpp"
 using namespace std;
 
 
@@ -99,6 +100,7 @@ namespace ge
     const game_enum & get_game_enum() const;
     const string & name() const;
   };
+
   
   enum goAgain { NO = 0, YES = 1 };  // temp
 
@@ -188,6 +190,7 @@ namespace ge
   const uint8_t & Game::id() const { return _id; }
   const ge::game_enum & Game::get_game_enum() const { return _game_enum; }
   const string & Game::name() const { return _name; }
+
 
 
   // GAME ENGINE / BASE CLASS
@@ -347,6 +350,7 @@ bool testing = false;
 
 void test();
 
+
 int main()
 {
   if(testing == true) { test(); return 0; }
@@ -362,7 +366,7 @@ int main()
   vec.emplace_back(uint8_t(0), string("asterisks"), ge::ASTERISKS);
   vec.emplace_back(1, "poker", ge::POKER);
 
-  ge::GameEngine games(vec);
+  ge::GameEngine games_v(vec);
   
 
 
@@ -375,26 +379,55 @@ int main()
   // TODO: convert from string to const char?
   // msg("_goAgainEnum",games._goAgainEnum);
 
+  enum Games { 
+    Asterisks,
+    Blackjack,
+  };
+
+  multimap<int,string> games =
+  { 
+    {0,"Asterisks"},
+    {1,"Black Jack"} 
+  };
+
+
+  string goAgain = "y";
+
+
   do{
 
+    msg("Welcome to the games");
 
-    if (games.start(asterisks_game.get_game_enum())) {
+    for (auto elem : games) {           
+      cout << elem.second << '(' << elem.first << ')' << endl;
+    }
+    // int game_to_play;
 
-        // for( ge::Game i : vec ){
-        //   msg( "game id", int(i.id()));
-        // }          
+    msg("Which game would you like to play? ");
 
-      // game.SetValues();
-      // game.OnValueUpdate(demo.algo);     
-      // game.start();
+
+    int game_to_play = HandleInputIntRange(0,10);
+
+
+    switch(game_to_play)
+    {
+      case Asterisks:
+        msg("0");
+        break;
+      case Blackjack:
+        msg("1");
+        break;
+      default:
+        msg("default");
+        break;
     }
 
 
-    string temp;
-    msg( "set Go Again Enum?");
-    cin >> temp;
-    games.SetGoAgain(temp);
-  } while(games._goAgainEnum);
+    msg( "Go Again? (y/n) [\"y\"]: ");
+    cin >> goAgain;
+    games_v.SetGoAgain(goAgain);
+
+  } while(games_v._goAgainEnum);
 
 
 
@@ -487,9 +520,11 @@ void test()
 
   // disp_v(vec);
 
-  for( ge::Game i : vec ){
-    // cout << i.name() << endl;
-  }
+  // for( ge::Game i : vec ){
+  //   msg( "game id", int(i.id()));
+  // }
+
+
 
 
   // Game Engine

@@ -1,7 +1,7 @@
 //-------------------------------------------------------------------------------
 //
 // Oscar Villagrana
-// Utils Decleration
+// Utils
 //
 //-------------------------------------------------------------------------------
 
@@ -9,18 +9,15 @@
 
 
 #include <iostream>
-#include <vector>
 #include <stdint.h>
-#include <map>
-// #include "utils/utils.cpp"
+#include <vector>
+#include <limits>             // Sanitize input
+// #include <map>
 using namespace std;
 
 
 //-------------------------------------------------------------------------------
-//
-// utils.h
 // Interface Decleration
-//
 //-------------------------------------------------------------------------------
 
 
@@ -29,6 +26,11 @@ template <typename T> void disp_v(vector<T> & v);
 template <typename T> void msg( T & m );
 template <typename T> void msg( const char * m, const T & v );
 
+
+
+//-------------------------------------------------------------------------------
+// Utils Implementation
+//-------------------------------------------------------------------------------
 
 
 template <typename T> 
@@ -57,7 +59,47 @@ struct preciseInts
 
 
 //-------------------------------------------------------------------------------
-//
-// Utils Implementation
-//
+// Utils Tests
 //-------------------------------------------------------------------------------
+
+
+  
+// Utils / integral sizes
+//-----------------------
+
+// uint8_t umax = 255;    cout << int(umax) << endl;
+// int8_t imax = 127;     cout << int(imax) << endl;
+// int8_t imin = -128;    cout << int(imin) << endl;
+
+
+//----------------------------------------------------------------------------------
+// Sanitize  Input
+//----------------------------------------------------------------------------------
+
+
+// Sanitize Int
+int HandleInputIntRange( int i, int j)
+{
+   int n = 0;
+
+   for (;;) {
+
+      std::cin >> n;
+
+      if (std::cin.fail()) {
+         std::cin.clear();
+         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+         continue;
+      }
+
+      // number range
+      if (n < i || n > j) {
+         continue;
+      }
+
+      return n;
+
+   }
+
+}
+ 

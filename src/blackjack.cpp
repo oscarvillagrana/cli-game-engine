@@ -2,6 +2,9 @@
 
 // Command line game that plays a simplified version of blackjack where we don’t worry about aces and face cards
 
+// TODO: fix 21 winner!
+
+
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
@@ -12,7 +15,7 @@ int get_random_seed();
 int get_random_number();
 
 
-int main()
+int blackjack()
 { 
 get_random_seed();
 

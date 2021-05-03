@@ -15,7 +15,7 @@ int get_random_seed();
 int get_random_number();
 
 
-int blackjack()
+int black_jack()
 { 
 get_random_seed();
 

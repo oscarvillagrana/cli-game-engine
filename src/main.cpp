@@ -18,6 +18,7 @@
 #include "asterisks.cpp"
 #include "blackjack.cpp"
 #include "pokerhands.cpp"
+#include "theleague.cpp"
 
 using namespace std;
 using namespace utils;
@@ -84,68 +85,66 @@ namespace ge
   ge::runcode GameEngine::Start()
   {
 
+    int sleepTime = 1.5;                // adds time between dialog
+    bool goAgain = true;
+
     enum Games
     { 
       Asterisks,
       Black_Jack,
       Poker_Hands,
-      Test3,
+      The_League,
       Test4,
       Test5,
     };
 
-    map<int,string> games =
+    map<int,string> game_names =
     { 
       {0,"Asterisks"},
       {1,"Black Jack"},
       {2,"Poker Hands"},
-      {3,"test3"},
+      {3,"The League"},
       {4,"test4"},
       {5,"test5"},
     };
 
 
-
-    bool goAgain = true;
-    int sleepTime = 1.5;
-
     do{
-
-      // goAgain = false;
 
       msg("Welcome to the games");
       sleep(sleepTime);
 
       cout << endl;
-      for (auto elem : games) { cout << elem.second << '(' << elem.first << ')' << endl;}
+      for (auto elem : game_names) { cout << elem.second << '(' << elem.first << ')' << endl;}
       cout << endl;
       sleep(sleepTime);
 
       msg("Which game would you like to play? ");
-
-      int game_to_play = HandleInputIntRange( 0, games.size() );
+      int game_to_play = HandleInputIntRange( 0, game_names.size() );
+      // int game_to_play = HandleInputIntRange( "Which game would you like to play? ", 0, game_names.size() );
 
       do{
 
         switch(game_to_play)
         {
           case Asterisks:
-            msg(games.at(0));
+            msg(game_names.at(0));
             asterisks();
             break;
 
           case Black_Jack:
-            msg(games.at(1));
+            msg(game_names.at(1));
             black_jack();
             break;
 
           case Poker_Hands:
-            msg(games.at(2));
+            msg(game_names.at(2));
             poker_hands();
             break;
 
-          case Test3:
-            msg("3");
+          case The_League:
+            msg(game_names.at(3));
+            the_league();
             break;
 
           case Test4:
@@ -161,27 +160,31 @@ namespace ge
             sleep(sleepTime);
 
             bool goAgain = true;
+            
             msg("Would you like to play a game? (y/n) [\"y\"]: ");
             goAgain = HandleInputBool();
-            if(goAgain == false) {
+            // goAgain = HandleInputBool("Would you like to play a game? (y/n) [\"y\"]: ");
 
+            if(goAgain == false) {
               msg("See you later!");
               exit(0);
             }
 
-            msg("Which game would you like to play? ");
 
+            msg("Which game would you like to play? ");
             // TODO: fix bug / see output
-            game_to_play = HandleInputIntRange( 0, games.size() );
+            game_to_play = HandleInputIntRange( 0, game_names.size() );
+            // game_to_play = HandleInputIntRange( "Which game would you like to play? ", 0, game_names.size() );
 
             break;
         }
-      } while( game_to_play >= games.size() );
+      } while( game_to_play >= game_names.size() );
 
       sleep(sleepTime);
-      msg( "Go Again? (y/n) [\"y\"]: ");
 
+      msg( "Go Again? (y/n) [\"y\"]: ");
       goAgain = HandleInputBool();
+      // goAgain = HandleInputBool("Go Again? (y/n) [\"y\"]: ");
 
     } while(goAgain);
 

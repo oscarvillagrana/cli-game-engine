@@ -16,11 +16,11 @@
 #include <stdint.h>
 #include <vector>
 #include <limits>             // Sanitize input
+#include <unistd.h>           // for sleep func
 // #include <map>
 using namespace std;
 
 
-#include <unistd.h>           // for sleep func
 
 
 namespace utils
@@ -107,7 +107,99 @@ namespace utils
 
    //----------------------------------------------------------------------------------
    // Sanitize  Input
+   //
+   // TODO: handle returns like getline does
    //----------------------------------------------------------------------------------
+
+  
+   //-------------------------
+   // With Strings
+   //-------------------------
+
+   // Sanitize Int
+   // Returns int if within given range, else returns negative
+   int HandleInputIntRange( string msg, int min, int max)
+   {
+
+      int n = 0;
+
+      for (;;) 
+      {
+
+         string line;
+
+         // std::cin.clear();
+         // std::cin.ignore(10000, '\n');
+         // getline(cin, line);
+         cout << msg; cin >> line;
+
+         // convert string to int
+         try { n = stoi(line); }
+         catch (const exception& e) { n = -1; }
+
+         // if (std::cin.fail()) {
+         //    std::cin.clear();
+         //    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+         //    continue;
+         // }
+
+         // valid range
+         if (n < min) { n = -1; }
+         if (n > max) { n = -1; }
+
+         return n;
+      }
+   }
+
+    
+   // Sanitize String
+   string HandleInputStrRange( string msg, int start, int end)
+   {
+      string n;
+
+      string a(end, '\0');
+
+      for (;;) 
+      {
+
+         // std::getline(std::cin, n);
+         cout << msg; cin >> n;
+
+         for ( int i = start; i < end; i++ )
+         {
+            a[i] = n[i];
+         }
+
+         if (std::cin.fail()) 
+         {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            continue;
+         }
+
+         return a;
+      }
+   }
+    
+
+   bool HandleInputBool(string msg)
+   { 
+      // std::cin.clear();
+      // std::cin.ignore(10000, '\n');
+
+      string input;
+      // getline(cin,input);
+
+      cout << msg; cin >> input;
+
+      if( input == "n") { return false; }
+      else { return true; }
+   }; 
+
+
+   //-------------------------
+   // Without Strings
+   //-------------------------
 
 
    // Sanitize Int
@@ -117,7 +209,8 @@ namespace utils
 
       int n = 0;
 
-      for (;;) {
+      for (;;) 
+      {
 
          string line;
 
@@ -151,7 +244,8 @@ namespace utils
 
       string a(end, '\0');
 
-      for (;;) {
+      for (;;) 
+      {
 
          std::getline(std::cin, n);
 
@@ -160,7 +254,8 @@ namespace utils
             a[i] = n[i];
          }
 
-         if (std::cin.fail()) {
+         if (std::cin.fail()) 
+         {
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             continue;
@@ -178,10 +273,11 @@ namespace utils
 
       string input;
       getline(cin,input);
+
+      
       if( input == "n") { return false; }
       else { return true; }
    }; 
-
 
 
 
@@ -232,7 +328,7 @@ namespace utils
 
    }
 
+}
+
 #pragma endregion
 #endif // GE_DEF
-
-}

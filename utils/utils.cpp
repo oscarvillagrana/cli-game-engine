@@ -3,6 +3,7 @@
 // Oscar Villagrana
 // Utils
 //
+// TODO: Go Again / handle empty input
 //-------------------------------------------------------------------------------
 
 #pragma region utils_declaration
@@ -181,13 +182,13 @@ namespace utils
       }
    }
     
-
+   // TODO: Go Again / handle empty input
    bool HandleInputBool(string msg)
    { 
+      string input;
+
       // std::cin.clear();
       // std::cin.ignore(10000, '\n');
-
-      string input;
       // getline(cin,input);
 
       cout << msg; cin >> input;
@@ -197,9 +198,9 @@ namespace utils
    }; 
 
 
-   //-------------------------
-   // Without Strings
-   //-------------------------
+   //-----------------------------
+   // Without Strings / DEPRECATED
+   //-----------------------------
 
 
    // Sanitize Int
@@ -216,7 +217,8 @@ namespace utils
 
          // std::cin.clear();
          // std::cin.ignore(10000, '\n');
-         getline(cin, line);
+         
+         getline(cin, line);                 // not sure if works right
 
          // convert string to int
          try { n = stoi(line); }
@@ -268,12 +270,13 @@ namespace utils
 
    bool HandleInputBool()
    { 
+      string input;
+
       // std::cin.clear();
       // std::cin.ignore(10000, '\n');
+      // getline(cin,input);                    // this does not work atm
 
-      string input;
-      getline(cin,input);
-
+      cin >> input;
       
       if( input == "n") { return false; }
       else { return true; }

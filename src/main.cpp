@@ -3,7 +3,7 @@
 // Oscar Villagrana
 // This program hosts multiple command line games
 //
-// TODO: fix bug / see output
+// TODO: Go Again / handle empty input
 // TODO: fix bug / pokerhand logic fail
 //
 //-------------------------------------------------------------------------------
@@ -42,17 +42,24 @@ using namespace utils;
 namespace ge
 {
 
-  //-----------------------
-  // GAME ENGINE BASE CLASS
-  //-----------------------
+
+  // GAME ENGINE / BASE CLASS
+  //-------------------------
 
   enum runcode { FAIL = 0, OK = 1, NO_FILE = -1 };
 
   struct GameEngine
   {
+
+    int sleepTime = 1.5;                // adds time between dialogs
+    bool goAgain = true;
+
     // constructors
     GameEngine(){};
     ge::runcode Start();
+
+    // member functions
+    void repeatGame(int (*func)());
   };
 }
 
@@ -82,32 +89,43 @@ namespace ge
   // GAME ENGINE / BASE CLASS
   //-------------------------
 
+
+  // ge namespace for test cases
+  map<int,string> game_names =
+  { 
+    {0,"Asterisks"},
+    {1,"Black Jack"},
+    {2,"Poker Hands"},
+    {3,"The League"},
+    {4,"test4"},
+    {5,"test5"},
+  };
+
+  enum Games
+  { 
+    Asterisks,
+    Black_Jack,
+    Poker_Hands,
+    The_League,
+    Test4,
+    Test5,
+  };
+
+
+  void GameEngine::repeatGame(int (*func)())
+  {
+    bool sameGame = true;
+    do
+    {
+      func();
+      // TODO: Go Again / handle empty input
+      sameGame = HandleInputBool("Go Again?  (y/n) [\"y\"]: ");
+    }
+    while(sameGame);
+  }
+
   ge::runcode GameEngine::Start()
   {
-
-    int sleepTime = 1.5;                // adds time between dialog
-    bool goAgain = true;
-
-    enum Games
-    { 
-      Asterisks,
-      Black_Jack,
-      Poker_Hands,
-      The_League,
-      Test4,
-      Test5,
-    };
-
-    map<int,string> game_names =
-    { 
-      {0,"Asterisks"},
-      {1,"Black Jack"},
-      {2,"Poker Hands"},
-      {3,"The League"},
-      {4,"test4"},
-      {5,"test5"},
-    };
-
 
     do{
 
@@ -119,74 +137,56 @@ namespace ge
       cout << endl;
       sleep(sleepTime);
 
-      msg("Which game would you like to play? ");
-      int game_to_play = HandleInputIntRange( 0, game_names.size() );
-      // int game_to_play = HandleInputIntRange( "Which game would you like to play? ", 0, game_names.size() );
+      int game_to_play = HandleInputIntRange( "Which game would you like to play? ", 0, game_names.size() );
 
-      do{
+      switch(game_to_play)
+      {
+        case Asterisks:
+          sleep(sleepTime);
+          msg(game_names.at(0));
+          repeatGame(asterisks);
+          break;
 
-        switch(game_to_play)
-        {
-          case Asterisks:
-            msg(game_names.at(0));
-            asterisks();
-            break;
+        case Black_Jack:
+          sleep(sleepTime);
+          msg(game_names.at(1));
+          repeatGame(black_jack);
+          break;
 
-          case Black_Jack:
-            msg(game_names.at(1));
-            black_jack();
-            break;
+        case Poker_Hands:
+          sleep(sleepTime);
+          msg(game_names.at(2));
+          poker_hands();
+          break;
 
-          case Poker_Hands:
-            msg(game_names.at(2));
-            poker_hands();
-            break;
+        case The_League:
+          sleep(sleepTime);
+          msg(game_names.at(3));
+          the_league();
+          break;
 
-          case The_League:
-            msg(game_names.at(3));
-            the_league();
-            break;
+        case Test4:
+          msg("4");
+          break;
 
-          case Test4:
-            msg("4");
-            break;
+        case Test5:
+          msg("5");
+          break;
 
-          case Test5:
-            msg("5");
-            break;
-
-          default:
-            msg("Sorry, game not found");
-            sleep(sleepTime);
-
-            bool goAgain = true;
-            
-            msg("Would you like to play a game? (y/n) [\"y\"]: ");
-            goAgain = HandleInputBool();
-            // goAgain = HandleInputBool("Would you like to play a game? (y/n) [\"y\"]: ");
-
-            if(goAgain == false) {
-              msg("See you later!");
-              exit(0);
-            }
-
-
-            msg("Which game would you like to play? ");
-            // TODO: fix bug / see output
-            game_to_play = HandleInputIntRange( 0, game_names.size() );
-            // game_to_play = HandleInputIntRange( "Which game would you like to play? ", 0, game_names.size() );
-
-            break;
-        }
-      } while( game_to_play >= game_names.size() );
+        default:
+          sleep(sleepTime);
+          msg("Sorry, game not found");
+          game_to_play = HandleInputIntRange( "Which game would you like to play? ", 0, game_names.size() );
+          break;
+      }
 
       sleep(sleepTime);
 
-      msg( "Go Again? (y/n) [\"y\"]: ");
-      goAgain = HandleInputBool();
-      // goAgain = HandleInputBool("Go Again? (y/n) [\"y\"]: ");
+      goAgain = HandleInputBool("Would you like to play another game? (y/n) [\"y\"]: ");
 
     } while(goAgain);
+
+    msg("See you later!");
 
     return OK;
   };
@@ -198,6 +198,8 @@ namespace ge
 #pragma endregion
 
 #endif // GE_IMPL
+
+
 
 
 
@@ -213,7 +215,7 @@ namespace ge
 
 
 bool testing = false;
-// bool testing = true;
+// testing = true;
 
 
 void test();
@@ -252,48 +254,21 @@ int main()
 void test()
 {
 
+  // GameEngine::repeatGame(int (*func)())
+
+  // ge::GameEngine games;
+
+  int game_to_play;
+  do {
+    game_to_play = HandleInputIntRange( "Which game would you like to play? ", 0, ge::game_names.size() );
+    cout << game_to_play << endl;
+  }
+  // while( game_to_play >= ge::game_names.size() );
+  while( game_to_play <= ge::game_names.size() );
 }
 
 
 
-
-
-// see output ...
-
-// Welcome to the games
-
-// Asterisks(0)
-// Black Jack(1)
-// test2(2)
-// test3(3)
-// test4(4)
-// test5(5)
-
-// Which game would you like to play? 
-// 0
-// Asterisks
-// How many asterisks?: 0
-
-// Go again? (y/n): n
-// Go Again? (y/n) ["y"]: 
-// Welcome to the games
-
-// Asterisks(0)
-// Black Jack(1)
-// test2(2)
-// test3(3)
-// test4(4)
-// test5(5)
-
-// Which game would you like to play? 
-
-// Sorry, game not found
-// Would you like to play a game? (y/n) ["y"]: 
-// y
-// Which game would you like to play? 
-// 0
-// Go Again? (y/n) ["y"]: 
-// n
 
 
 
